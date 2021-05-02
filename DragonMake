@@ -1,0 +1,44 @@
+name: aquarius
+id: com.nico671.bettermusicplayer
+icmd: sbreload
+depends: mobilesubstrate (>= 0.9.5000), firmware (>= 14.0),
+version: 1.0.1
+architecture: iphoneos-arm
+desc: gesture recognition across iOS
+mtn: kritanta
+author: Tr1Fecta & kritanta
+section: Tweaks
+
+
+aquarius:
+  type: tweak
+  dir: tweak
+  files:
+    - Tweak.xm
+  frameworks:
+    - MediaRemote
+    - CoreGraphics
+    - QuartzCore
+    - UIKit
+  libs:
+    - kitten
+    - sparkcolourpicker
+    - bulletin
+aquariusprefs:
+  type: prefs
+  dir: prefs
+  files:
+    - "*.m"
+  libs:
+    - applist
+    - colorpicker
+    - Preferences
+  frameworks:
+  - Cephei
+  - CepheiPrefs
+  - UIKit 
+  - CoreGraphics
+  - QuartzCore
+  - Preferences 
+  - SpringBoardServices
+  - OnBoardingKit
