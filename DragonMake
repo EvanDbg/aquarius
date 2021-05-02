@@ -1,20 +1,19 @@
 name: aquarius
 id: com.nico671.bettermusicplayer
 icmd: sbreload
-depends: mobilesubstrate (>= 0.9.5000), firmware (>= 14.0),
-version: 1.0.1
+depends: mobilesubstrate (>= 0.9.5000), firmware (>= 14.0), com.spark.libsparkcolourpicker, net.limneos.libbulletin, love.litten.libkitten, ws.hbang.common (>= 1.16)
+version: 2.0
 architecture: iphoneos-arm
-desc: gesture recognition across iOS
-mtn: kritanta
-author: Tr1Fecta & kritanta
+desc: beautify your lockscreen
+author: nico671
 section: Tweaks
-
 
 aquarius:
   type: tweak
   dir: tweak
   files:
     - Tweak.xm
+    - MarqueeLabel.m
   frameworks:
     - MediaRemote
     - CoreGraphics
@@ -24,21 +23,25 @@ aquarius:
     - kitten
     - sparkcolourpicker
     - bulletin
+  archs:
+        - arm64
+        - arm64e
+
+
 aquariusprefs:
+  archs:
+    - arm64
+    - arm64e
   type: prefs
   dir: prefs
   files:
     - "*.m"
-  libs:
-    - applist
-    - colorpicker
-    - Preferences
   frameworks:
-  - Cephei
-  - CepheiPrefs
-  - UIKit 
-  - CoreGraphics
-  - QuartzCore
-  - Preferences 
-  - SpringBoardServices
-  - OnBoardingKit
+    - Cephei
+    - CepheiPrefs
+    - UIKit 
+    - CoreGraphics
+    - QuartzCore
+    - Preferences 
+    - SpringBoardServices
+    - OnBoardingKit

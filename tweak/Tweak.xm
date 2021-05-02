@@ -4,7 +4,7 @@ BOOL musicPlayerEnabled, musicPlayerColorsEnabled;
 BOOL isTimeHidden,showPercentage, modernStatusBar, isCellularThingyHidden, isWifiThingyHidden, isRoutingButtonHidden, isBackgroundColored, isDarkImage, isArtworkBackground, haveNotifs, haveOutline, statusBarSectionEnabled, isBatteryHidden;
 //TODO: fucking fix the default player and the progress bar player u dunce
 id preferences, file, yes;
-long int configurations;
+long long configurations;
 NSString *previousTitle = @"poggers";
 double musicPlayerAlpha, outlineSize, rightOffsetForText;
 NSDictionary *preferencesDictionary = [NSDictionary dictionaryWithContentsOfFile:@"/var/mobile/Library/Preferences/aquariusprefs.plist"];
@@ -530,7 +530,7 @@ void reloadPrefs() { //prefs
 	[file registerBool:&isRoutingButtonHidden default:YES forKey:@"isRoutingButtonHidden"];
 	[file registerDouble:&musicPlayerAlpha default:1 forKey:@"musicPlayerAlpha"];
 	[file registerDouble:&rightOffsetForText default:1 forKey:@"textOffset"];
-	[file registerInteger:&configurations default:0 forKey:@"configuration"];
+//[file registerInteger:&configurations default:0 forKey:@"configuration"];
 	[file registerBool:&musicPlayerColorsEnabled default:NO forKey:@"isColorsEnabled"];
 	[file registerBool:&haveNotifs default:YES forKey:@"notifications?"];
 	[file registerBool:&isBackgroundColored default:NO forKey:@"isBackgroundColorEnabled"];

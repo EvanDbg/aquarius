@@ -2,7 +2,7 @@ name = aquariusprefs
 lowername = aquariusprefs
 
 # Build file for aquariusprefs
-# Generated at 05/01/21 16:37:44
+# Generated at 05/02/21 10:45:57
 
 stagedir = _
 location = /Library/PreferenceBundles/$name.bundle
@@ -53,7 +53,7 @@ triple = -target arm64-apple-ios$targetvers
 frameworks = -framework Cephei -framework CepheiPrefs -framework UIKit $
     -framework CoreGraphics -framework QuartzCore -framework Preferences $
     -framework SpringBoardServices -framework OnBoardingKit
-libs = -lapplist -lcolorpicker -lPreferences
+libs = -lsubstrate
 
 macros = 
 arc = -fobjc-arc
@@ -105,6 +105,9 @@ rule linkarm64
 rule linkarm64e
   command = $ld -arch arm64e $internallflags $internalldflags -o $out $in 
   description = Linking $in with $ld [arm64e]
+rule stage
+  command = $stage && $stage2
+  description = Running Stage for $name
 rule lipo
   command = $lipo -create $in -output $out
   description = Merging architechtures
@@ -114,9 +117,6 @@ rule debug
 rule sign
   command = $codesign $entflag$entfile $in && cp $in $out
   description = Signing $name
-rule stage
-  command = $stage && $stage2
-  description = Running Stage for $name
 
 build $builddir/$name.armv7: linkarmv7
 build $builddir/$name.arm64: linkarm64
