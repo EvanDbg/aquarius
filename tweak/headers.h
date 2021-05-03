@@ -12,7 +12,7 @@
 #import <AVKit/AVKit.h>
 #import <MediaRemote/MediaRemote.h>
 #import <AudioToolbox/AudioServices.h>
-#import "SparkColourPickerUtils.h"
+#import "GcUniversal/GcColorPickerUtils.h"
 #import "MarqueeLabel.h"
 #import <QuartzCore/QuartzCore.h>
 #import <Kitten/libKitten.h>

@@ -4,7 +4,7 @@ BOOL musicPlayerEnabled, musicPlayerColorsEnabled;
 BOOL isTimeHidden,showPercentage, modernStatusBar, isCellularThingyHidden, isWifiThingyHidden, isRoutingButtonHidden, isBackgroundColored, isDarkImage, isArtworkBackground, haveNotifs, haveOutline, statusBarSectionEnabled, isBatteryHidden;
 //TODO: fucking fix the default player and the progress bar player u dunce
 id preferences, file, yes;
-long long configurations;
+NSInteger configurations;
 NSString *previousTitle = @"poggers";
 double musicPlayerAlpha, outlineSize, rightOffsetForText;
 NSDictionary *preferencesDictionary = [NSDictionary dictionaryWithContentsOfFile:@"/var/mobile/Library/Preferences/aquariusprefs.plist"];
@@ -46,7 +46,7 @@ NSDictionary *preferencesDictionary = [NSDictionary dictionaryWithContentsOfFile
 			[artistNameLabel setTextAlignment:NSTextAlignmentLeft];
 			[artistNameLabel setAlpha:1];
 			[self addSubview:artistNameLabel];
-			UIColor *customColor = [SparkColourPickerUtils colourWithString:[preferencesDictionary objectForKey:@"customTitleLabelColor"] withFallback:@"#000000"];
+			UIColor *customColor = [GcColorPickerUtils colorFromDefaults:@"aquariusprefs" withKey:@"customTitleLabelColor"];
 			[songTitleLabel setTextColor:customColor];
 			[artistNameLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
 			[artistNameLabel.widthAnchor constraintEqualToConstant:230].active = YES;
@@ -60,7 +60,7 @@ NSDictionary *preferencesDictionary = [NSDictionary dictionaryWithContentsOfFile
 			[songTitleLabel setTextAlignment:NSTextAlignmentLeft];
 			[songTitleLabel setAlpha:1];
 			[self addSubview:songTitleLabel];
-			UIColor *customColor = [SparkColourPickerUtils colourWithString:[preferencesDictionary objectForKey:@"customSubtitleLabelColor"] withFallback:@"#000000"];
+			UIColor *customColor = [GcColorPickerUtils colorFromDefaults:@"aquariusprefs" withKey:@"customSubtitleLabelColor"];
 			[songTitleLabel setTextColor:customColor];
 			[songTitleLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
 			[songTitleLabel.widthAnchor constraintEqualToConstant:230].active = YES;
@@ -92,7 +92,7 @@ NSDictionary *preferencesDictionary = [NSDictionary dictionaryWithContentsOfFile
 			[artistNameLabel setTextAlignment:NSTextAlignmentLeft];
 			[artistNameLabel setAlpha:1];
 			[self addSubview:artistNameLabel];
-			UIColor *customColor = [SparkColourPickerUtils colourWithString:[preferencesDictionary objectForKey:@"customTitleLabelColor"] withFallback:@"#000000"];
+			UIColor *customColor = [GcColorPickerUtils colorFromDefaults:@"aquariusprefs" withKey:@"customTitleLabelColor"];
 			[songTitleLabel setTextColor:customColor];
 			[artistNameLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
 			[artistNameLabel.widthAnchor constraintEqualToConstant:230].active = YES;
@@ -106,7 +106,7 @@ NSDictionary *preferencesDictionary = [NSDictionary dictionaryWithContentsOfFile
 			[songTitleLabel setTextAlignment:NSTextAlignmentLeft];
 			[songTitleLabel setAlpha:1];
 			[self addSubview:songTitleLabel];
-			UIColor *customColor = [SparkColourPickerUtils colourWithString:[preferencesDictionary objectForKey:@"customSubtitleLabelColor"] withFallback:@"#000000"];
+			UIColor *customColor = [GcColorPickerUtils colorFromDefaults:@"aquariusprefs" withKey:@"customSubtitleLabelColor"];
 			[songTitleLabel setTextColor:customColor];
 			[songTitleLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
 			[songTitleLabel.widthAnchor constraintEqualToConstant:230].active = YES;
@@ -137,7 +137,7 @@ NSDictionary *preferencesDictionary = [NSDictionary dictionaryWithContentsOfFile
 			[artistNameLabel setTextAlignment:NSTextAlignmentLeft];
 			[artistNameLabel setAlpha:1];
 			[self addSubview:artistNameLabel];
-			UIColor *customColor = [SparkColourPickerUtils colourWithString:[preferencesDictionary objectForKey:@"customTitleLabelColor"] withFallback:@"#000000"];
+			UIColor *customColor = [GcColorPickerUtils colorFromDefaults:@"aquariusprefs" withKey:@"customTitleLabelColor"];
 			[songTitleLabel setTextColor:customColor];
 			[artistNameLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
 			[artistNameLabel.widthAnchor constraintEqualToConstant:230].active = YES;
@@ -152,7 +152,7 @@ NSDictionary *preferencesDictionary = [NSDictionary dictionaryWithContentsOfFile
 				[songTitleLabel setAlpha:1];
 				[self addSubview:songTitleLabel];
 				{
-				UIColor *customColor = [SparkColourPickerUtils colourWithString:[preferencesDictionary objectForKey:@"customSubtitleLabelColor"] withFallback:@"#000000"];
+				UIColor *customColor = [GcColorPickerUtils colorFromDefaults:@"aquariusprefs" withKey:@"customSubtitleLabelColor"];
 				[songTitleLabel setTextColor:customColor];
 				}
 				[songTitleLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
@@ -183,7 +183,7 @@ NSDictionary *preferencesDictionary = [NSDictionary dictionaryWithContentsOfFile
 			[artistNameLabel setTextAlignment:NSTextAlignmentLeft];
 			[artistNameLabel setAlpha:1];
 			[self addSubview:artistNameLabel];
-			UIColor *customColor = [SparkColourPickerUtils colourWithString:[preferencesDictionary objectForKey:@"customTitleLabelColor"] withFallback:@"#000000"];
+			[GcColorPickerUtils colorFromDefaults:@"aquariusprefs" withKey:@"customTitleLabelColor"];
 			[songTitleLabel setTextColor:customColor];
 			[artistNameLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
 			[artistNameLabel.widthAnchor constraintEqualToConstant:230].active = YES;
@@ -198,7 +198,7 @@ NSDictionary *preferencesDictionary = [NSDictionary dictionaryWithContentsOfFile
 			[songTitleLabel setAlpha:1];
 			[self addSubview:songTitleLabel];
 			if (musicPlayerColorsEnabled) {
-				UIColor *customColor = [SparkColourPickerUtils colourWithString:[preferencesDictionary objectForKey:@"customSubtitleLabelColor"] withFallback:@"#000000"];
+				UIColor *customColor = [GcColorPickerUtils colorFromDefaults:@"aquariusprefs" withKey:@"customSubtitleColor"];
 				[songTitleLabel setTextColor:customColor];
 			}
 			[songTitleLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
@@ -235,17 +235,17 @@ NSDictionary *preferencesDictionary = [NSDictionary dictionaryWithContentsOfFile
 
 	MRUNowPlayingViewController *controller = (MRUNowPlayingViewController *)[self _viewControllerForAncestor];
 	if (musicPlayerColorsEnabled && controller.context == 2) {
-		UIColor *leftColor = [SparkColourPickerUtils colourWithString:[preferencesDictionary objectForKey:@"customLeftButtonColor"] withFallback:@"#000000"];
+		UIColor *leftColor = [GcColorPickerUtils colorFromDefaults:@"aquariusprefs" withKey:@"customLeftButtonColor"];
 		[self.leftButton setStylingProvider:nil];
 		self.leftButton.imageView.layer.filters = nil;
 		[self.leftButton.imageView setTintColor:leftColor];
 		
-		UIColor *middleColor = [SparkColourPickerUtils colourWithString:[preferencesDictionary objectForKey:@"customMiddleButtonColor"] withFallback:@"#000000"];
+		UIColor *middleColor = [GcColorPickerUtils colorFromDefaults:@"aquariusprefs" withKey:@"customMiddleButtonColor"];
 		[self.middleButton setStylingProvider:nil];
 		self.middleButton.imageView.layer.filters = nil;
 		[self.middleButton.imageView setTintColor:middleColor];
 		
-		UIColor *rightColor = [SparkColourPickerUtils colourWithString:[preferencesDictionary objectForKey:@"customRightButtonColor"] withFallback:@"#000000"];
+		UIColor *rightColor = [GcColorPickerUtils colorFromDefaults:@"aquariusprefs" withKey:@"customRightButtonColor"];
 		[self.rightButton setStylingProvider:nil];
 		self.rightButton.imageView.layer.filters = nil;
 		[self.rightButton.imageView setTintColor:rightColor];
@@ -265,7 +265,7 @@ if(configurations == 0){
 
  if (haveOutline){
   self.layer.borderWidth = outlineSize;
-  UIColor* customColor = [SparkColourPickerUtils colourWithString:[preferencesDictionary objectForKey:@"outlineColor"] withFallback:@"#000000"];
+  UIColor *customColor = [GcColorPickerUtils colorFromDefaults:@"aquariusprefs" withKey:@"outlineColor"];
   self.layer.borderColor = [customColor CGColor];
   self.layer.cornerRadius = 10;
   }
@@ -302,7 +302,7 @@ else if(configurations == 1 || configurations == 2){
 
    if (haveOutline){
   self.layer.borderWidth = outlineSize;
-  UIColor* customColor = [SparkColourPickerUtils colourWithString:[preferencesDictionary objectForKey:@"outlineColor"] withFallback:@"#000000"];
+UIColor *customColor = [GcColorPickerUtils colorFromDefaults:@"aquariusprefs" withKey:@"outlineColor"];
   self.layer.borderColor = [ customColor CGColor];
   self.layer.cornerRadius = 10;
   }
@@ -337,7 +337,7 @@ if (isBackgroundColored){
 else if(configurations == 3){
   if (haveOutline){
   self.layer.borderWidth = outlineSize;
-  UIColor* customColor = [SparkColourPickerUtils colourWithString:[preferencesDictionary objectForKey:@"outlineColor"] withFallback:@"#000000"];
+ UIColor *customColor = [GcColorPickerUtils colorFromDefaults:@"aquariusprefs" withKey:@"outlineColor"];
   self.layer.borderColor = [customColor CGColor];
   self.layer.cornerRadius = 10;
   }
@@ -415,13 +415,13 @@ if (isBackgroundColored){
 %hook _UIBatteryView
 
 -(void)setFillColor:(UIColor *)color {
-  UIColor* customColor = [SparkColourPickerUtils colourWithString:[preferencesDictionary objectForKey:@"batteryFillColor"] withFallback:@"#000000"];
+  UIColor *customColor = [GcColorPickerUtils colorFromDefaults:@"aquariusprefs" withKey:@"batteryFillColor"];
 	%orig(customColor);
 	if(isBatteryHidden) self.hidden = YES;
 }
 
 -(void)setBodyColor:(UIColor *)color {
- UIColor* customColor = [SparkColourPickerUtils colourWithString:[preferencesDictionary objectForKey:@"batteryFillColor"] withFallback:@"#000000"];
+UIColor *customColor = [GcColorPickerUtils colorFromDefaults:@"aquariusprefs" withKey:@"batteryFillColor"];
 	%orig(customColor);
 }
 
@@ -457,12 +457,12 @@ if (isBackgroundColored){
 %hook _UIStatusBarSignalView
 
 -(void)setActiveColor:(UIColor *)color {
-UIColor* customColor = [SparkColourPickerUtils colourWithString:[preferencesDictionary objectForKey:@"cellularColor"] withFallback:@"#000000"];
+	UIColor *customColor = [GcColorPickerUtils colorFromDefaults:@"aquariusprefs" withKey:@"cellularColor"];
 	%orig(customColor);
 }
 
 -(void)setInactiveColor:(UIColor *)color {
-UIColor* customColor = [SparkColourPickerUtils colourWithString:[preferencesDictionary objectForKey:@"cellularColor"] withFallback:@"#000000"];
+	UIColor *customColor = [GcColorPickerUtils colorFromDefaults:@"aquariusprefs" withKey:@"cellularColor"];
 	%orig(customColor);
 }
 
@@ -490,7 +490,7 @@ UIColor* customColor = [SparkColourPickerUtils colourWithString:[preferencesDict
 	}
 }
 -(void)setTextColor:(UIColor *)color {
-	UIColor* customColor = [SparkColourPickerUtils colourWithString:[preferencesDictionary objectForKey:@"timeColor"] withFallback:@"#000000"];
+				UIColor *customColor = [GcColorPickerUtils colorFromDefaults:@"aquariusprefs" withKey:@"timeColor"];
 	%orig(customColor);
 }
 
@@ -530,7 +530,7 @@ void reloadPrefs() { //prefs
 	[file registerBool:&isRoutingButtonHidden default:YES forKey:@"isRoutingButtonHidden"];
 	[file registerDouble:&musicPlayerAlpha default:1 forKey:@"musicPlayerAlpha"];
 	[file registerDouble:&rightOffsetForText default:1 forKey:@"textOffset"];
-//[file registerInteger:&configurations default:0 forKey:@"configuration"];
+	[file registerInteger:&configurations default:0 forKey:@"configuration"];
 	[file registerBool:&musicPlayerColorsEnabled default:NO forKey:@"isColorsEnabled"];
 	[file registerBool:&haveNotifs default:YES forKey:@"notifications?"];
 	[file registerBool:&isBackgroundColored default:NO forKey:@"isBackgroundColorEnabled"];
