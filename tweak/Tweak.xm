@@ -2,7 +2,6 @@
 
 BOOL musicPlayerEnabled, musicPlayerColorsEnabled;
 BOOL isTimeHidden,showPercentage, modernStatusBar, isCellularThingyHidden, isWifiThingyHidden, isRoutingButtonHidden, isBackgroundColored, isDarkImage, isArtworkBackground, haveNotifs, haveOutline, statusBarSectionEnabled, isBatteryHidden;
-//TODO: fucking fix the default player and the progress bar player u dunce
 id preferences, file, yes;
 NSInteger configurations;
 NSString *previousTitle = @"poggers";

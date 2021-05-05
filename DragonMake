@@ -1,21 +1,16 @@
-name: aquarius
-id: com.nico671.bettermusicplayer
-depends: mobilesubstrate (>= 0.9.5000), firmware (>= 14.0), com.spark.libsparkcolourpicker, net.limneos.libbulletin, love.litten.libkitten, ws.hbang.common (>= 1.16)
-version: 2.0
-architecture: iphoneos-arm
-desc: beautify your iDevice
-author: nico671
-section: Tweaks
 
+name: Aquarius 
+all:
+    archs:
+        - arm64
+        - arm64e
+    targetios: 14.0
 aquarius:
     type: tweak 
     dir: tweak
     files:
-        - Tweak.xm
         - MarqueeLabel.m
-    archs:
-        - arm64
-        - arm64e
+        - Tweak.xm
     libs:
         - bulletin
         - kitten
@@ -29,11 +24,17 @@ aquarius:
 aquariusprefs:
     type: prefs
     dir: prefs
-    archs:
-        - arm64
-        - arm64e
+    targetios: 14.0
     files:
-        - "*.m"
+        - AQRRootListController.m
+        - CLCRootListController.m
+        - LKSRootListController.m
+        - MSPRootListController.m
+        - OTLRootListController.m
+        - SETRootListController.m
+        - SPRRootListController.m
+        - STSRootListController.m
+        - XXXSymbolsLinkCell.m
     frameworks:
         - Cephei
         - CepheiPrefs
@@ -43,4 +44,5 @@ aquariusprefs:
         - Preferences 
         - SpringBoardServices
         - OnBoardingKit
- 
+    libs:
+        - gcuniversal

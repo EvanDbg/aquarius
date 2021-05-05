@@ -1,0 +1,18 @@
+# ninja log v5
+0	123	1620052857440879609	.dragon/build/logos/Tweak.xm.mm	952ab86b0749bc81
+124	539	1620052857850706401	.dragon/build/arm64/Tweak.xm.mm.o	419c2c1dff0f5f33
+124	553	1620052857865962448	.dragon/build/arm64e/Tweak.xm.mm.o	e064636276fcb57d
+1	558	1620052857871905498	.dragon/build/arm64e/MarqueeLabel.m.o	436f6663243411b8
+0	568	1620052857883014421	.dragon/build/arm64/MarqueeLabel.m.o	5c8d8138aa9e0f0d
+0	605	1620052857919573059	.dragon/build/armv7/MarqueeLabel.m.o	ce73b84f179ea62a
+123	627	1620052857939741406	.dragon/build/armv7/Tweak.xm.mm.o	fce3e290339309db
+558	756	1620052858072377512	.dragon/build/aquarius.arm64e	7b4256ef9735a43c
+568	756	1620052858072377387	.dragon/build/aquarius.arm64	43eb73d89f313662
+0	258	1620052868876005615	.dragon/build/arm64/MarqueeLabel.m.o	a1971fcee02851b7
+0	317	1620052868936519279	.dragon/build/armv7/MarqueeLabel.m.o	f06f7cbff811b07e
+1	337	1620052868957071568	.dragon/build/arm64e/MarqueeLabel.m.o	cc03058ffd5886cd
+0	383	1620052869002171525	.dragon/build/armv7/Tweak.xm.mm.o	cdf1d086d0ccb976
+1	399	1620052869018476446	.dragon/build/arm64/Tweak.xm.mm.o	b257ab9c7d93de1c
+1	404	1620052869024231628	.dragon/build/arm64e/Tweak.xm.mm.o	201bed282b1f5e9d
+1	191	1620052888524669930	.dragon/build/aquarius.arm64	df3caf6f6eac17b0
+1	191	1620052888524683846	.dragon/build/aquarius.arm64e	c3edd1dfdbbe2b17

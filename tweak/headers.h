@@ -211,11 +211,8 @@
 -(void)updateVisibility;
 @end
 
-
-
 @interface MRUNowPlayingView : UIView
 @property (nonatomic, retain) MRUNowPlayingControlsView *controlsView;
-
 @end
 
 @interface MRUNowPlayingViewController : UIViewController
@@ -233,8 +230,6 @@
 -(BOOL)changeTrack:(int)arg1 eventSource:(long long)arg2 ;
 @end
 
-
-
 MarqueeLabel* songTitleLabel;
 MarqueeLabel* artistNameLabel;
 UIButton* songImageForSmall;
@@ -249,16 +244,10 @@ UIView *test;
 UIColor *customColor;
 NSString *songLabel;
 NSString *subtitleLabel;
-UIStackView* stackView;
-UIView* aqView;
 
 @interface PLPlatterView : UIView
 @property (nonatomic,retain) MTMaterialView * backgroundView;
 @end
-
-
-
-
 
 @interface CSCoverSheetViewController : UIViewController
 @end

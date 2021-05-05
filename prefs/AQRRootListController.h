@@ -2,7 +2,8 @@
 #import <Preferences/PSListController.h>
 #import <CepheiPrefs/HBAppearanceSettings.h>
 #import <Cephei/HBPreferences.h>
-
+#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 #import <CepheiPrefs/HBRootListController.h>
 
 @interface AQRRootListController : PSListController
