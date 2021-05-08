@@ -41,7 +41,7 @@
 				<key>cellClass</key>
                 <string>XXXSymbolsLinkCell</string>
                 <key>icon</key>
-                <string>scroll</string>
+                <string>music.note.list</string>
 				<key>isController</key>
 				<true/>
 				<key>label</key>

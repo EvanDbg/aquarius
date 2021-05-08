@@ -22,7 +22,7 @@ aquarius:
         - Cephei
 aquariusprefs:
     type: prefs
-    dir: prefs
+    dir: aquariusprefs
     targetios: 14.0
     files:
         - AQRRootListController.m
@@ -42,5 +42,3 @@ aquariusprefs:
         - Preferences 
         - SpringBoardServices
         - OnBoardingKit
-    libs:
-        - gcuniversal

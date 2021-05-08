@@ -7,4 +7,4 @@ Maintainer: nico671 <nico671dev@gmail.com>
 Author: nico671 <nico671dev0@gmail.com>
 Section: Tweaks
 Depends: com.spark.libsparkcolourpicker, net.limneos.libbulletin, love.litten.libkitten, ws.hbang.common (>= 1.16)
-Installed-Size: 3392
+Installed-Size: 3408
