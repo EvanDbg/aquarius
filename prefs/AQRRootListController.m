@@ -6,7 +6,7 @@
 #import <SpringBoardServices/SBSRestartRenderServerAction.h>
 #import <FrontBoardServices/FBSSystemService.h>
 #include <spawn.h>
-
+#include <UIKit/UIKit.h>
 @implementation AQRRootListController
 - (void)twitterDave {
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://twitter.com/davewijk"] options:@{} completionHandler:nil];
@@ -43,10 +43,10 @@
 - (void)setupWelcomeController {
     welcomeController = [[OBWelcomeController alloc] initWithTitle:@"Welcome to Aquarius" detailText:@"Bring modern gestures and many unique features to your device." icon:[UIImage imageWithContentsOfFile:@"/Library/PreferenceBundles/HalFiPadPrefs.bundle/icon.png"]];
 
-    [welcomeController addBulletedListItemWithTitle:@"Customization" description:@"Redesign the lockscreen music player" image:[UIImage systemImageNamed:@"music.note.list"]];
-    [welcomeController addBulletedListItemWithTitle:@"Colors" description:@"Choose the colors of the player buttons" image:[UIImage systemImageNamed:@"paintpalette.fill"]];
-    [welcomeController addBulletedListItemWithTitle:@"Notifications" description:@"Notifications everytime a new song starts" image:[UIImage systemImageNamed:@"app.badge"]];
-    [welcomeController addBulletedListItemWithTitle:@"Open Source" description:@"aquarius is open source. feel free to use it!" image:[UIImage systemImageNamed:@"chevron.left.slash.chevron.right"]];
+    //[welcomeController addBulletedListItemWithTitle:@"Customization" description:@"Redesign the lockscreen music player" image:[UIImage systemImageNamed:@"music.note.list"]];
+    //[welcomeController addBulletedListItemWithTitle:@"Colors" description:@"Choose the colors of the player buttons" image:[UIImage systemImageNamed:@"paintpalette.fill"]];
+    //[welcomeController addBulletedListItemWithTitle:@"Notifications" description:@"Notifications everytime a new song starts" image:[UIImage systemImageNamed:@"app.badge"]];
+    //[welcomeController addBulletedListItemWithTitle:@"Open Source" description:@"aquarius is open source. feel free to use it!" image:[UIImage systemImageNamed:@"chevron.left.slash.chevron.right"]];
     [welcomeController.buttonTray addCaptionText:@"by nico671"];
 
     OBBoldTrayButton* continueButton = [OBBoldTrayButton buttonWithType:1];
@@ -58,7 +58,6 @@
     [welcomeController.buttonTray addButton:continueButton];
 
     welcomeController.modalPresentationStyle = UIModalPresentationPageSheet;
-    welcomeController.modalInPresentation = YES;
     welcomeController.view.tintColor = [UIColor colorWithRed:0.60 green:0.75 blue:0.85 alpha:1.0];
     [self presentViewController:welcomeController animated:YES completion:nil];
 }

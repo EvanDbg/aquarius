@@ -3,9 +3,8 @@
 #import <CepheiPrefs/HBAppearanceSettings.h>
 #import <Cephei/HBPreferences.h>
 #import <Foundation/Foundation.h>
-#import <UIKit/UIKit.h>
 #import <CepheiPrefs/HBRootListController.h>
-
+#import <UIKit/UIKit.h>
 @interface AQRRootListController : PSListController
 @property (nonatomic, retain) UISwitch *switchy;
 @property (nonatomic, retain) UIBarButtonItem *respringButton;

@@ -4,7 +4,6 @@ all:
     archs:
         - arm64
         - arm64e
-    targetios: 14.0
 aquarius:
     type: tweak 
     dir: tweak
@@ -37,8 +36,7 @@ aquariusprefs:
         - XXXSymbolsLinkCell.m
     frameworks:
         - Cephei
-        - CepheiPrefs
-        - UIKit 
+        - CepheiPrefs 
         - CoreGraphics
         - QuartzCore
         - Preferences 

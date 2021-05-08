@@ -1,5 +1,5 @@
 #import <Preferences/PSSpecifier.h>
-
+#import <UIKit/UIKit.h>
 @interface UIColor (SymbolsLinkCell)
 + (UIColor *)customDynamicColorWithLightColor:(id)lightColor darkColor:(id)darkColor API_AVAILABLE(ios(13.0));
 + (UIColor *)colorFromHexString:(NSString *)hex;

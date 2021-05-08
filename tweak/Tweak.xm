@@ -1,12 +1,4 @@
 #import "headers.h"
-
-BOOL musicPlayerEnabled, musicPlayerColorsEnabled;
-BOOL isTimeHidden,showPercentage, modernStatusBar, isCellularThingyHidden, isWifiThingyHidden, isRoutingButtonHidden, isBackgroundColored, isDarkImage, isArtworkBackground, haveNotifs, haveOutline, statusBarSectionEnabled, isBatteryHidden;
-id preferences, file, yes;
-NSInteger configurations;
-NSString *previousTitle = @"poggers";
-double musicPlayerAlpha, outlineSize, rightOffsetForText;
-NSDictionary *preferencesDictionary = [NSDictionary dictionaryWithContentsOfFile:@"/var/mobile/Library/Preferences/aquariusprefs.plist"];
 %group musicplayer
 %hook MRUNowPlayingHeaderView // hides the little routing button
 - (void)setShowRoutingButton:(BOOL)arg1 {

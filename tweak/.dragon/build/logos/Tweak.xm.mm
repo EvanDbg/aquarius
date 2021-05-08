@@ -1,6 +1,4 @@
 #line 1 "Tweak.xm"
-#import "headers.h"
-
 
 #include <substrate.h>
 #if defined(__clang__)
@@ -22,10 +20,11 @@
 #define _LOGOS_RETURN_RETAINED
 #endif
 
-@class _UIStatusBarWifiSignalView; @class _UIStatusBarSignalView; @class _UIStatusBar; @class _UIStatusBarCellularSignalView; @class MRUNowPlayingControlsView; @class SBMediaController; @class _UIStatusBarStringView; @class MRUNowPlayingLabelView; @class _UIBatteryView; @class MRUNowPlayingHeaderView; @class _UIStatusBarVisualProvider_Split54; @class MRUNowPlayingTransportControlsView; @class CSAdjunctItemView; 
+@class MRUNowPlayingTransportControlsView; @class MRUNowPlayingControlsView; @class SBMediaController; @class _UIStatusBarVisualProvider_Split54; @class MRUNowPlayingHeaderView; @class _UIStatusBarWifiSignalView; @class _UIStatusBar; @class _UIStatusBarSignalView; @class CSAdjunctItemView; @class _UIStatusBarCellularSignalView; @class MRUNowPlayingLabelView; @class _UIBatteryView; @class _UIStatusBarStringView; 
 
 static __inline__ __attribute__((always_inline)) __attribute__((unused)) Class _logos_static_class_lookup$SBMediaController(void) { static Class _klass; if(!_klass) { _klass = objc_getClass("SBMediaController"); } return _klass; }
-#line 3 "Tweak.xm"
+#line 1 "Tweak.xm"
+#import "headers.h"
 BOOL musicPlayerEnabled, musicPlayerColorsEnabled;
 BOOL isTimeHidden,showPercentage, modernStatusBar, isCellularThingyHidden, isWifiThingyHidden, isRoutingButtonHidden, isBackgroundColored, isDarkImage, isArtworkBackground, haveNotifs, haveOutline, statusBarSectionEnabled, isBatteryHidden;
 id preferences, file, yes;
@@ -543,7 +542,7 @@ void reloadPrefs() {
 	outlineSize = [file doubleForKey:@"sizeOfOutline?"];
 }
 
-static __attribute__((constructor)) void _logosLocalCtor_96adcea7(int __unused argc, char __unused **argv, char __unused **envp) {
+static __attribute__((constructor)) void _logosLocalCtor_f21fdb22(int __unused argc, char __unused **argv, char __unused **envp) {
 	HBPreferences *file = [[HBPreferences alloc] initWithIdentifier:@"aquariusprefs"];
 	[file registerBool:&musicPlayerEnabled default:YES forKey:@"isMusicSectionEnabled"];
 	[file registerBool:&isTimeHidden default:NO forKey:@"isTimeHidden"];

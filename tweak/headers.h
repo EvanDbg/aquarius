@@ -1,5 +1,5 @@
 #import <Foundation/Foundation.h>
-#import <UIKit/UIKit.h>
+
 #import <CoreText/CoreText.h>
 #import <EventKit/EventKit.h>
 #import <Cephei/HBPreferences.h>
@@ -207,8 +207,6 @@
 @property (nonatomic, retain) MRUNowPlayingTimeControlsView *timeControlsView;
 @property (nonatomic, retain) MRUNowPlayingTransportControlsView *transportControlsView;
 @property (nonatomic, retain) MRUNowPlayingVolumeControlsView *volumeControlsView;
-+(id)sharedInstance;
--(void)updateVisibility;
 @end
 
 @interface MRUNowPlayingView : UIView
@@ -252,8 +250,14 @@ NSString *subtitleLabel;
 @interface CSCoverSheetViewController : UIViewController
 @end
 
-
-
 @interface NextUpViewController : UIViewController
 - (id)initWithControlCenter:(BOOL)controlCenter defaultStyle:(long long)style;
 @end
+
+BOOL musicPlayerEnabled, musicPlayerColorsEnabled;
+BOOL isTimeHidden,showPercentage, modernStatusBar, isCellularThingyHidden, isWifiThingyHidden, isRoutingButtonHidden, isBackgroundColored, isDarkImage, isArtworkBackground, haveNotifs, haveOutline, statusBarSectionEnabled, isBatteryHidden;
+id preferences, file, yes;
+NSInteger configurations;
+NSString *previousTitle = @"poggers";
+double musicPlayerAlpha, outlineSize, rightOffsetForText;
+NSDictionary *preferencesDictionary = [NSDictionary dictionaryWithContentsOfFile:@"/var/mobile/Library/Preferences/aquariusprefs.plist"];

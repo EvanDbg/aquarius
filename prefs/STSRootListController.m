@@ -2,7 +2,7 @@
 #import <Preferences/PSSpecifier.h>
 #import <Preferences/PSTableCell.h>
 #import <Preferences/PSSwitchTableCell.h>
-#import "SparkColourPickerView.h"
+#import <UIKit/UIKit.h>
 #import <SpringBoardServices/SBSRestartRenderServerAction.h>
 #import <FrontBoardServices/FBSSystemService.h>
 #import <CepheiPrefs/HBAppearanceSettings.h>

@@ -10,10 +10,8 @@
 		<string>PSLinkCell</string>
 		<key>detail</key>
 		<string>AQRRootListController</string>
-		   <key>cellClass</key>
-<string>XXXSymbolsLinkCell</string>
-<key>icon</key>
-<string>lock.fill</string>
+		<key>icon</key>
+		<string>icon.png</string>
 		<key>isController</key>
 		<true/>
 		<key>label</key>

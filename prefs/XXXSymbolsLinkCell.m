@@ -1,5 +1,5 @@
 #import "XXXSymbolsLinkCell.h"
-
+#import <UIKit/UIKit.h>
 @implementation UIColor (SymbolsLinkCell)
 
 + (UIColor *)customDynamicColorWithLightColor:(id)lightColor darkColor:(id)darkColor {

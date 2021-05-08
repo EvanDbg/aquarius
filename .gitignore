@@ -2,3 +2,5 @@
 .theos/
 packages/
 tweak/packages/
+build.ninja
+.dragon/
