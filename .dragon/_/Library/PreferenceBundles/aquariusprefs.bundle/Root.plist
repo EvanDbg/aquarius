@@ -25,7 +25,7 @@
 				<key>cellClass</key>
                 <string>XXXSymbolsLinkCell</string>
                 <key>icon</key>
-                <string>scroll</string>
+                <string>candybarphone</string>
 				<key>isController</key>
 				<true/>
 				<key>label</key>
@@ -41,12 +41,28 @@
 				<key>cellClass</key>
                 <string>XXXSymbolsLinkCell</string>
                 <key>icon</key>
-                <string>scroll</string>
+                <string>music.note.list</string>
 				<key>isController</key>
 				<true/>
 				<key>label</key>
 				<string>Music Player Settings</string>
 				</dict>
+                <dict>
+                    <key>AquariusSub</key>
+                     <string>Notifications</string>
+                    <key>cell</key>
+                    <string>PSLinkCell</string>
+                    <key>detail</key>
+                    <string>NTFRootListController</string>
+                    <key>cellClass</key>
+                    <string>XXXSymbolsLinkCell</string>
+                    <key>icon</key>
+                    <string>scroll</string>
+                    <key>isController</key>
+                    <true/>
+                    <key>label</key>
+                    <string>Notification Settings</string>
+                    </dict> 
             <dict>
                 <key>cell</key>
                 <string>PSGroupCell</string>

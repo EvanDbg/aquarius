@@ -253,15 +253,27 @@
 
 -(void)_updateSizeToMimic{
 	%orig;
-PLPlatterView *platterView = (PLPlatterView*)MSHookIvar<UIView*>(self, "_platterView");
-[platterView.backgroundView setAlpha: musicPlayerAlpha];
+	[self setTheFuckUp];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setTheFuckUp) name:@"com.nico671.updateColors" object:nil];
 
+
+}
+
+%new 
+-(void) setTheFuckUp{
+	PLPlatterView *platterView = (PLPlatterView*)MSHookIvar<UIView*>(self, "_platterView");
+[platterView.backgroundView setAlpha: musicPlayerAlpha];
 if(configurations == 0){
 
  if (haveOutline){
   self.layer.borderWidth = outlineSize;
-  UIColor *customColor = [GcColorPickerUtils colorFromDefaults:@"aquariusprefs" withKey:@"outlineColor"];
+ if (!haveOutlineSecondaryColorMusicPlayer){
+ UIColor *customColor = [GcColorPickerUtils colorFromDefaults:@"aquariusprefs" withKey:@"outlineColor"];
   self.layer.borderColor = [customColor CGColor];
+  }
+  else {
+	self.layer.borderColor = [fuckingArtworkColor2 CGColor];
+  }
   self.layer.cornerRadius = 10;
   }
 [self.heightAnchor constraintEqualToConstant:115].active = true; //height
@@ -282,12 +294,7 @@ songBackground = [UIButton new];
 
 if (isBackgroundColored){
  [platterView.backgroundView setAlpha: 0];
-  coloredBackground = [UIView new];
-  [coloredBackground setFrame: CGRectMake(self.frame.origin.x,self.frame.origin.y,self.frame.size.width,self.frame.size.height)];
-  [coloredBackground.layer setCornerRadius:10];
-  [coloredBackground setAlpha:musicPlayerAlpha];
-  [self addSubview: coloredBackground];
-  [self sendSubviewToBack:coloredBackground];
+  self.backgroundColor = fuckingArtworkColor;
 }
 
 
@@ -297,8 +304,13 @@ else if(configurations == 1 || configurations == 2){
 
    if (haveOutline){
   self.layer.borderWidth = outlineSize;
-UIColor *customColor = [GcColorPickerUtils colorFromDefaults:@"aquariusprefs" withKey:@"outlineColor"];
-  self.layer.borderColor = [ customColor CGColor];
+if (!haveOutlineSecondaryColorMusicPlayer){
+ UIColor *customColor = [GcColorPickerUtils colorFromDefaults:@"aquariusprefs" withKey:@"outlineColor"];
+  self.layer.borderColor = [customColor CGColor];
+  }
+  else {
+	    self.layer.borderColor = [fuckingArtworkColor2 CGColor];
+  }
   self.layer.cornerRadius = 10;
   }
 [self.heightAnchor constraintEqualToConstant:130].active = true;
@@ -319,12 +331,7 @@ songBackground = [UIButton new];
 
 if (isBackgroundColored){
  [platterView.backgroundView setAlpha: 0];
-  coloredBackground = [UIView new];
-  [coloredBackground setFrame: CGRectMake(self.frame.origin.x,self.frame.origin.y,self.frame.size.width,self.frame.size.height)];
-  [coloredBackground.layer setCornerRadius:10];
-  [coloredBackground setAlpha:musicPlayerAlpha];
-  [self addSubview: coloredBackground];
-  [self sendSubviewToBack:coloredBackground];
+    self.backgroundColor = fuckingArtworkColor;
 }
 
 
@@ -333,10 +340,17 @@ else if(configurations == 3){
 	[self.heightAnchor constraintEqualToConstant:100].active = true;
   if (haveOutline){
   self.layer.borderWidth = outlineSize;
+  if (!haveOutlineSecondaryColorMusicPlayer){
  UIColor *customColor = [GcColorPickerUtils colorFromDefaults:@"aquariusprefs" withKey:@"outlineColor"];
   self.layer.borderColor = [customColor CGColor];
+  }
+  else {
+	    self.layer.borderColor = [fuckingArtworkColor2 CGColor];
+  }
   self.layer.cornerRadius = 10;
   }
+}
+
   
 if (isArtworkBackground){
    [platterView.backgroundView setAlpha: 0];
@@ -354,41 +368,33 @@ songBackground = [UIButton new];
 
 if (isBackgroundColored){
  [platterView.backgroundView setAlpha: 0];
-  coloredBackground = [UIView new];
-  [coloredBackground setFrame: CGRectMake(self.frame.origin.x,self.frame.origin.y,self.frame.size.width,self.frame.size.height)];
-  [coloredBackground.layer setCornerRadius:10];
-  [coloredBackground setAlpha:musicPlayerAlpha];
-  [self addSubview: coloredBackground];
-  [self sendSubviewToBack:coloredBackground];
-}
-
+    self.backgroundColor = fuckingArtworkColor;
 }
 }
-
 
 %end
 
 %hook SBMediaController
-- (void)setNowPlayingInfo:(id)arg1 { // set now playing info
+- (void)setNowPlayingInfo:(id)arg1 { 
     %orig;
     MRMediaRemoteGetNowPlayingInfo(dispatch_get_main_queue(), ^(CFDictionaryRef information) {
         if (information) {
 			NSDictionary *dict = (__bridge NSDictionary *)information;
-
 			currentArtwork = [UIImage imageWithData:[dict objectForKey:(__bridge NSString*)kMRMediaRemoteNowPlayingInfoArtworkData]]; 
 			if (dict) {
 				[songTitleLabel setText:[NSString stringWithFormat:@"%@ ", [dict objectForKey:(__bridge NSString*)kMRMediaRemoteNowPlayingInfoTitle]]]; // set song title
 				lastArtworkData = [dict objectForKey:(__bridge NSString*)kMRMediaRemoteNowPlayingInfoArtworkData];
-
-				[artistNameLabel setText:[NSString stringWithFormat:@"%@ - %@ ", [dict objectForKey:(__bridge NSString*)kMRMediaRemoteNowPlayingInfoArtist], [dict objectForKey:(__bridge NSString*)kMRMediaRemoteNowPlayingInfoAlbum]]]; // set artist and album name
-			 // set artwork            
-
+				[artistNameLabel setText:[NSString stringWithFormat:@"%@ - %@ ", [dict objectForKey:(__bridge NSString*)kMRMediaRemoteNowPlayingInfoArtist], [dict objectForKey:(__bridge NSString*)kMRMediaRemoteNowPlayingInfoAlbum]]]; // set artist and album name          
 				subtitleLabel = [NSString stringWithFormat:@"%@ - %@ ", [dict objectForKey:(__bridge NSString*)kMRMediaRemoteNowPlayingInfoArtist], [dict objectForKey:(__bridge NSString*)kMRMediaRemoteNowPlayingInfoAlbum]];
 				songLabel = [NSString stringWithFormat:@"%@ ", [dict objectForKey:(__bridge NSString*)kMRMediaRemoteNowPlayingInfoTitle]];
-
 				[songBackground setImage:currentArtwork forState:UIControlStateNormal];
 				[songImageForSmall setImage:currentArtwork forState:UIControlStateNormal]; 
-				[coloredBackground setBackgroundColor:[libKitten primaryColor:currentArtwork]];
+				[[NSNotificationCenter defaultCenter] postNotificationName:@"com.nico671.updateColors" object:nil];
+				AquariusColorManager * manager = [[AquariusColorManager alloc]init];
+				colorDict = [manager coloursForImage:currentArtwork forEdge:3];
+				fuckingArtworkColor = [colorDict objectForKey:@"background"];
+				fuckingArtworkColor2 = [colorDict objectForKey:@"primary"];
+				
 			}
 			lastArtworkData = [dict objectForKey:(__bridge NSString*)kMRMediaRemoteNowPlayingInfoArtworkData];
         }
@@ -493,9 +499,56 @@ UIColor *customColor = [GcColorPickerUtils colorFromDefaults:@"aquariusprefs" wi
 %end
 %end
 
+%group notifications
+%hook NCNotificationListCell
+-(void)layoutSubviews{
+	%orig;
+	if (isNotificationSectionEnabled){
+	self.backgroundColor = [UIColor clearColor];
+	}
+
+}
+%end
+
+%hook NCNotificationContentView
+
+-(void)setNeedsLayout{
+	%orig;
+	if (hideSnapImage){
+	UIImageView *replacementSnapImage = (UIImageView*)MSHookIvar<UIImageView*>(self, "_thumbnailImageView");
+	replacementSnapImage.hidden = YES;
+	}
+}
+
+%end
+
+
+%hook PLPlatterHeaderContentView
+
+-(void)setNeedsLayout {
+	%orig;
+	iconImage = [self.icons objectAtIndex:0];
+}
+
+%end
+
+%hook NCNotificationShortLookView
+
+-(void)setNeedsLayout {
+	%orig; 
+	self.backgroundColor = [libKitten primaryColor:iconImage];
+	self.layer.cornerRadius = 15;
+	yesmf = [self.subviews objectAtIndex:0];
+	yesmf.hidden = YES;
+}
+
+%end
+%end
+
 void reloadPrefs() { //prefs
 	musicPlayerEnabled = [file boolForKey:@"isMusicSectionEnabled"];
 	statusBarSectionEnabled = [file boolForKey:@"isStausBarSectionEnabled"];
+	hideSnapImage = [file boolForKey:@"hideSnapImage"];
 	isBatteryHidden = [file boolForKey:@"isBatteryHidden"];
 	isWifiThingyHidden = [file boolForKey:@"isWifiHidden"];
 	isCellularThingyHidden = [file boolForKey:@"isCellularHidden"];
@@ -510,14 +563,18 @@ void reloadPrefs() { //prefs
 	showPercentage = [file boolForKey:@"showPercentage"]; 
 	isBackgroundColored = [file boolForKey:@"isBackgroundColorEnabled"];
 	isArtworkBackground = [file boolForKey:@"isArtworkBackground"];
+	isNotificationSectionEnabled = [file boolForKey:@"isNotificationSectionEnabled"];
 	haveOutline = [file boolForKey:@"haveOutline?"];
 	outlineSize = [file doubleForKey:@"sizeOfOutline?"];
+	haveOutline = [file boolForKey:@"haveOutline?"];
+	haveOutlineSecondaryColorMusicPlayer = [file boolForKey:@"haveOutlineSecondaryColorMusicPlayer"];
 }
 
 %ctor {
 	HBPreferences *file = [[HBPreferences alloc] initWithIdentifier:@"aquariusprefs"];
 	[file registerBool:&musicPlayerEnabled default:YES forKey:@"isMusicSectionEnabled"];
 	[file registerBool:&isTimeHidden default:NO forKey:@"isTimeHidden"];
+	[file registerBool:&hideSnapImage default:YES forKey:@"hideSnapImage"];
 	[file registerBool:&isBatteryHidden default:NO forKey:@"isBatteryHidden"];
 	[file registerBool:&isCellularThingyHidden default:NO forKey:@"isCellularHidden"];
 	[file registerBool:&isWifiThingyHidden default:NO forKey:@"isWifiHidden"];
@@ -533,8 +590,14 @@ void reloadPrefs() { //prefs
 	[file registerBool:&isArtworkBackground default:NO forKey:@"isArtworkBackground"];
 	[file registerBool:&haveOutline default:NO forKey:@"haveOutline?"];
 	[file registerBool:&showPercentage default:NO forKey:@"showPercentage"];
+	[file registerBool:&isNotificationSectionEnabled default:NO forKey:@"isNotificationSectionEnabled"];
 	[file registerDouble:&outlineSize default:5 forKey:@"sizeOfOutline?"];
+	[file registerBool:&haveOutlineSecondaryColorMusicPlayer default:NO forKey:@"haveOutlineSecondaryColorMusicPlayer"];
+			
 
+ 	if (isNotificationSectionEnabled) {
+	 	%init(notifications);
+ 	}
 	if (musicPlayerEnabled) {
         %init(musicplayer);
 	}

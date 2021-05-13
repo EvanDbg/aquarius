@@ -25,69 +25,54 @@
             <key>label</key>
             <string>Button Coloring</string>
 			</dict>
-	<dict>
-		<key>cell</key>
-		<string>PSLinkCell</string>
-		<key>cellClass</key>
-		<string>SparkColourPickerCell</string>
-		<key>libsparkcolourpicker</key>
 		<dict>
+			<key>cell</key>
+			<string>PSLinkCell</string>
+			<key>cellClass</key>
+			<string>GcColorPickerCell</string>
+			<key>label</key>
+			<string>Custom Left Button Color</string>
 			<key>defaults</key>
 			<string>aquariusprefs</string>
-			<key>PostNotification</key>
-			<string>com.nico671.preferenceschanged</string>
-			<key>fallback</key>
-			<string>#000000</string>
-			<key>alpha</key>
+			<key>key</key>
+			<string>customLeftButtonColor</string>
+			<key>supportsAlpha</key>
 			<true/>
-		</dict>
-		<key>label</key>
-		<string>Left Button Coloring</string>
-		<key>key</key>
-		<string>customLeftButtonColor</string>
+			<key>fallback</key>
+			<string>ffffffff</string>
 		</dict>
 	<dict>
-		<key>cell</key>
-		<string>PSLinkCell</string>
-		<key>cellClass</key>
-		<string>SparkColourPickerCell</string>
-		<key>libsparkcolourpicker</key>
-		<dict>
-			<key>defaults</key>
-			<string>aquariusprefs</string>
-			<key>PostNotification</key>
-			<string>com.nico671.preferenceschanged</string>
-			<key>fallback</key>
-			<string>#000000</string>
-			<key>alpha</key>
-			<true/>
-		</dict>
-		<key>label</key>
-		<string>Middle Buttons Coloring</string>
-		<key>key</key>
-		<string>customMiddleButtonColor</string>
-	</dict>
+        <key>cell</key>
+        <string>PSLinkCell</string>
+        <key>cellClass</key>
+        <string>GcColorPickerCell</string>
+        <key>label</key>
+        <string>Custom Middle Button Color</string>
+        <key>defaults</key>
+        <string>aquariusprefs</string>
+        <key>key</key>
+        <string>customMiddleButtonColor</string>
+        <key>supportsAlpha</key>
+        <true/>
+        <key>fallback</key>
+        <string>ffffffff</string>
+    </dict>
 	<dict>
-		<key>cell</key>
-		<string>PSLinkCell</string>
-		<key>cellClass</key>
-		<string>SparkColourPickerCell</string>
-		<key>libsparkcolourpicker</key>
-		<dict>
-			<key>defaults</key>
-			<string>aquariusprefs</string>
-			<key>PostNotification</key>
-			<string>com.nico671.preferenceschanged</string>
-			<key>fallback</key>
-			<string>#000000</string>
-			<key>alpha</key>
-			<true/>
-		</dict>
-		<key>label</key>
-		<string>Right Button Coloring</string>
-		<key>key</key>
-		<string>customRightButtonColor</string>
-	</dict>
+        <key>cell</key>
+        <string>PSLinkCell</string>
+        <key>cellClass</key>
+        <string>GcColorPickerCell</string>
+        <key>label</key>
+        <string>Custom Right Button Color</string>
+        <key>defaults</key>
+        <string>aquariusprefs</string>
+        <key>key</key>
+        <string>customRightButtonColor</string>
+        <key>supportsAlpha</key>
+        <true/>
+        <key>fallback</key>
+        <string>ffffffff</string>
+    </dict>
 	 <dict>
             <key>cell</key>
             <string>PSGroupCell</string>

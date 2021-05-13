@@ -1,10 +1,9 @@
 #import <Foundation/Foundation.h>
-
+#import "AquariusColorManager.m"
 #import <CoreText/CoreText.h>
 #import <EventKit/EventKit.h>
 #import <Cephei/HBPreferences.h>
 #import <sys/utsname.h>
-#import "Kitten/libKitten.h"
 #import <Cephei/HBPreferences.h>
 #import <objc/runtime.h>
 #import <dlfcn.h>
@@ -18,6 +17,15 @@
 #import <Kitten/libKitten.h>
 #import <AVKit/AVKit.h>
 
+@interface NCNotificationListCell : UIView
+@property (nonatomic, copy, readwrite) UIColor *backgroundColor;
+@end
+
+@interface NCNotificationShortLookView : UIView
+@property (nonatomic, copy, readwrite) UIColor *backgroundColor;
+@property NSArray *subviews;
+@end
+
 @interface SBApplication : NSObject
 @property (nonatomic,readonly) NSString * bundleIdentifier;                                                                                     //@synthesize bundleIdentifier=_bundleIdentifier - In the implementation block
 @end
@@ -29,8 +37,8 @@
 @end
 
 @interface MTMaterialView: UIView
-
 @end
+
 @interface _UIBatteryView
 @property (nonatomic, assign, readwrite, getter=isHidden) BOOL hidden;
 @end
@@ -82,7 +90,7 @@
 @interface CSAdjunctItemView : UIView{ //player iOS 13 & 14
 	UIView* _platterView;
 }
-
+-(void) setTheFuckUp;
 @end
 
 @interface SBDashBoardMediaControlsViewController : UIViewController // iOS 12
@@ -228,23 +236,12 @@
 -(BOOL)changeTrack:(int)arg1 eventSource:(long long)arg2 ;
 @end
 
-MarqueeLabel* songTitleLabel;
-MarqueeLabel* artistNameLabel;
-UIButton* songImageForSmall;
-UIButton* songBackground;
-UIImage *currentArtwork;
-UIImage *currentArtwork2;
-UIImage *currentArtwork3;
-NSData* lastArtworkData;
-NSData* lastArtworkData2;
-UIView *coloredBackground;
-UIView *test;
-UIColor *customColor;
-NSString *songLabel;
-NSString *subtitleLabel;
-
 @interface PLPlatterView : UIView
 @property (nonatomic,retain) MTMaterialView * backgroundView;
+@end
+
+@interface PLPlatterHeaderContentView
+@property (nonatomic,copy,readwrite) NSArray *icons;
 @end
 
 @interface CSCoverSheetViewController : UIViewController
@@ -254,10 +251,28 @@ NSString *subtitleLabel;
 - (id)initWithControlCenter:(BOOL)controlCenter defaultStyle:(long long)style;
 @end
 
-BOOL musicPlayerEnabled, musicPlayerColorsEnabled;
+BOOL musicPlayerEnabled, musicPlayerColorsEnabled, isNotificationSectionEnabled, hideSnapImage, haveOutlineSecondaryColorMusicPlayer;
 BOOL isTimeHidden,showPercentage, modernStatusBar, isCellularThingyHidden, isWifiThingyHidden, isRoutingButtonHidden, isBackgroundColored, isDarkImage, isArtworkBackground, haveNotifs, haveOutline, statusBarSectionEnabled, isBatteryHidden;
 id preferences, file, yes;
 NSInteger configurations;
 NSString *previousTitle = @"poggers";
 double musicPlayerAlpha, outlineSize, rightOffsetForText;
 NSDictionary *preferencesDictionary = [NSDictionary dictionaryWithContentsOfFile:@"/var/mobile/Library/Preferences/aquariusprefs.plist"];
+MarqueeLabel* songTitleLabel;
+MarqueeLabel* artistNameLabel;
+UIButton* songImageForSmall;
+UIButton* songBackground;
+UIImage *currentArtwork;
+UIImage *iconImage;
+NSData* lastArtworkData;
+NSData* lastArtworkData2;
+UIView *coloredBackground;
+UIView *test;
+UIColor *customColor;
+NSString *songLabel;
+NSString *subtitleLabel;
+UIColor *fuckingArtworkColor;
+UIColor *fuckingArtworkColor2;
+MTMaterialView *yesmf;
+
+NSDictionary* colorDict;

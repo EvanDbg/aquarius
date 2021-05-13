@@ -20,12 +20,13 @@
 #define _LOGOS_RETURN_RETAINED
 #endif
 
-@class _UIStatusBarVisualProvider_Split54; @class _UIStatusBar; @class CSAdjunctItemView; @class _UIStatusBarStringView; @class _UIBatteryView; @class _UIStatusBarWifiSignalView; @class MRUNowPlayingControlsView; @class MRUNowPlayingTransportControlsView; @class _UIStatusBarCellularSignalView; @class _UIStatusBarSignalView; @class MRUNowPlayingHeaderView; @class MRUNowPlayingLabelView; @class SBMediaController; 
+@class PLPlatterHeaderContentView; @class MRUNowPlayingLabelView; @class SBMediaController; @class _UIStatusBarStringView; @class _UIStatusBarCellularSignalView; @class _UIStatusBar; @class MRUNowPlayingHeaderView; @class _UIStatusBarSignalView; @class CSAdjunctItemView; @class _UIBatteryView; @class NCNotificationShortLookView; @class _UIStatusBarWifiSignalView; @class NCNotificationListCell; @class NCNotificationContentView; @class _UIStatusBarVisualProvider_Split54; @class MRUNowPlayingControlsView; @class MRUNowPlayingTransportControlsView; 
 
 static __inline__ __attribute__((always_inline)) __attribute__((unused)) Class _logos_static_class_lookup$SBMediaController(void) { static Class _klass; if(!_klass) { _klass = objc_getClass("SBMediaController"); } return _klass; }
 #line 1 "Tweak.xm"
 #import "headers.h"
 static void (*_logos_orig$musicplayer$MRUNowPlayingHeaderView$setShowRoutingButton$)(_LOGOS_SELF_TYPE_NORMAL MRUNowPlayingHeaderView* _LOGOS_SELF_CONST, SEL, BOOL); static void _logos_method$musicplayer$MRUNowPlayingHeaderView$setShowRoutingButton$(_LOGOS_SELF_TYPE_NORMAL MRUNowPlayingHeaderView* _LOGOS_SELF_CONST, SEL, BOOL); static void (*_logos_orig$musicplayer$MRUNowPlayingControlsView$setNeedsLayout)(_LOGOS_SELF_TYPE_NORMAL MRUNowPlayingControlsView* _LOGOS_SELF_CONST, SEL); static void _logos_method$musicplayer$MRUNowPlayingControlsView$setNeedsLayout(_LOGOS_SELF_TYPE_NORMAL MRUNowPlayingControlsView* _LOGOS_SELF_CONST, SEL); static void (*_logos_orig$musicplayer$MRUNowPlayingLabelView$setFrame$)(_LOGOS_SELF_TYPE_NORMAL MRUNowPlayingLabelView* _LOGOS_SELF_CONST, SEL, CGRect); static void _logos_method$musicplayer$MRUNowPlayingLabelView$setFrame$(_LOGOS_SELF_TYPE_NORMAL MRUNowPlayingLabelView* _LOGOS_SELF_CONST, SEL, CGRect); static void (*_logos_orig$musicplayer$MRUNowPlayingTransportControlsView$setNeedsLayout)(_LOGOS_SELF_TYPE_NORMAL MRUNowPlayingTransportControlsView* _LOGOS_SELF_CONST, SEL); static void _logos_method$musicplayer$MRUNowPlayingTransportControlsView$setNeedsLayout(_LOGOS_SELF_TYPE_NORMAL MRUNowPlayingTransportControlsView* _LOGOS_SELF_CONST, SEL); static void (*_logos_orig$musicplayer$CSAdjunctItemView$_updateSizeToMimic)(_LOGOS_SELF_TYPE_NORMAL CSAdjunctItemView* _LOGOS_SELF_CONST, SEL); static void _logos_method$musicplayer$CSAdjunctItemView$_updateSizeToMimic(_LOGOS_SELF_TYPE_NORMAL CSAdjunctItemView* _LOGOS_SELF_CONST, SEL); static void (*_logos_orig$musicplayer$SBMediaController$setNowPlayingInfo$)(_LOGOS_SELF_TYPE_NORMAL SBMediaController* _LOGOS_SELF_CONST, SEL, id); static void _logos_method$musicplayer$SBMediaController$setNowPlayingInfo$(_LOGOS_SELF_TYPE_NORMAL SBMediaController* _LOGOS_SELF_CONST, SEL, id); 
+
  
 static void _logos_method$musicplayer$MRUNowPlayingHeaderView$setShowRoutingButton$(_LOGOS_SELF_TYPE_NORMAL MRUNowPlayingHeaderView* _LOGOS_SELF_CONST __unused self, SEL __unused _cmd, BOOL arg1) {
 	MRUNowPlayingViewController *controller = (MRUNowPlayingViewController *)[self _viewControllerForAncestor];
@@ -42,7 +43,6 @@ static void _logos_method$musicplayer$MRUNowPlayingHeaderView$setShowRoutingButt
 static void _logos_method$musicplayer$MRUNowPlayingControlsView$setNeedsLayout(_LOGOS_SELF_TYPE_NORMAL MRUNowPlayingControlsView* _LOGOS_SELF_CONST __unused self, SEL __unused _cmd){
 
 	MRUNowPlayingViewController *controller = (MRUNowPlayingViewController *)[self _viewControllerForAncestor]; 
-	if (isArtworkBackground) [self.headerView.artworkView setHidden:YES]; 
 	if (controller.context == 2 && configurations == 0) {
 		[self.transportControlsView setFrame:CGRectMake(CGRectGetMidX(self.headerView.artworkView.frame) + 5,CGRectGetMidY(self.headerView.frame)-15, self.transportControlsView.frame.size.width, self.transportControlsView.frame.size.height)];
 		
@@ -63,8 +63,8 @@ static void _logos_method$musicplayer$MRUNowPlayingControlsView$setNeedsLayout(_
 			[artistNameLabel setTextAlignment:NSTextAlignmentLeft];
 			[artistNameLabel setAlpha:1];
 			[self addSubview:artistNameLabel];
-			UIColor *customColor = [GcColorPickerUtils colorFromDefaults:@"aquariusprefs" withKey:@"customTitleLabelColor"];
-			[songTitleLabel setTextColor:customColor];
+			UIColor *customColor = [GcColorPickerUtils colorFromDefaults:@"aquariusprefs" withKey:@"customTitleLabelColor" fallback:@"000000"];
+			[artistNameLabel setTextColor:customColor];
 			[artistNameLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
 			[artistNameLabel.widthAnchor constraintEqualToConstant:230].active = YES;
 			[artistNameLabel.heightAnchor constraintEqualToConstant:21.0].active = YES;
@@ -77,8 +77,10 @@ static void _logos_method$musicplayer$MRUNowPlayingControlsView$setNeedsLayout(_
 			[songTitleLabel setTextAlignment:NSTextAlignmentLeft];
 			[songTitleLabel setAlpha:1];
 			[self addSubview:songTitleLabel];
-			UIColor *customColor = [GcColorPickerUtils colorFromDefaults:@"aquariusprefs" withKey:@"customSubtitleLabelColor"];
+			{
+			UIColor *customColor = [GcColorPickerUtils colorFromDefaults:@"aquariusprefs" withKey:@"customSubtitleLabelColor" fallback:@"000000"];
 			[songTitleLabel setTextColor:customColor];
+			}
 			[songTitleLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
 			[songTitleLabel.widthAnchor constraintEqualToConstant:230].active = YES;
 			[songTitleLabel.heightAnchor constraintEqualToConstant:21.0].active = YES;
@@ -109,8 +111,8 @@ static void _logos_method$musicplayer$MRUNowPlayingControlsView$setNeedsLayout(_
 			[artistNameLabel setTextAlignment:NSTextAlignmentLeft];
 			[artistNameLabel setAlpha:1];
 			[self addSubview:artistNameLabel];
-			UIColor *customColor = [GcColorPickerUtils colorFromDefaults:@"aquariusprefs" withKey:@"customTitleLabelColor"];
-			[songTitleLabel setTextColor:customColor];
+			UIColor *customColor = [GcColorPickerUtils colorFromDefaults:@"aquariusprefs" withKey:@"customTitleLabelColor" fallback:@"000000"];
+			[artistNameLabel setTextColor:customColor];
 			[artistNameLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
 			[artistNameLabel.widthAnchor constraintEqualToConstant:230].active = YES;
 			[artistNameLabel.heightAnchor constraintEqualToConstant:21.0].active = YES;
@@ -123,8 +125,10 @@ static void _logos_method$musicplayer$MRUNowPlayingControlsView$setNeedsLayout(_
 			[songTitleLabel setTextAlignment:NSTextAlignmentLeft];
 			[songTitleLabel setAlpha:1];
 			[self addSubview:songTitleLabel];
-			UIColor *customColor = [GcColorPickerUtils colorFromDefaults:@"aquariusprefs" withKey:@"customSubtitleLabelColor"];
+			{
+			UIColor *customColor = [GcColorPickerUtils colorFromDefaults:@"aquariusprefs" withKey:@"customSubtitleLabelColor" fallback:@"000000"];
 			[songTitleLabel setTextColor:customColor];
+			}
 			[songTitleLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
 			[songTitleLabel.widthAnchor constraintEqualToConstant:230].active = YES;
 			[songTitleLabel.heightAnchor constraintEqualToConstant:21.0].active = YES;
@@ -154,8 +158,8 @@ static void _logos_method$musicplayer$MRUNowPlayingControlsView$setNeedsLayout(_
 			[artistNameLabel setTextAlignment:NSTextAlignmentLeft];
 			[artistNameLabel setAlpha:1];
 			[self addSubview:artistNameLabel];
-			UIColor *customColor = [GcColorPickerUtils colorFromDefaults:@"aquariusprefs" withKey:@"customTitleLabelColor"];
-			[songTitleLabel setTextColor:customColor];
+			UIColor *customColor = [GcColorPickerUtils colorFromDefaults:@"aquariusprefs" withKey:@"customTitleLabelColor" fallback:@"000000"];
+			[artistNameLabel setTextColor:customColor];
 			[artistNameLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
 			[artistNameLabel.widthAnchor constraintEqualToConstant:230].active = YES;
 			[artistNameLabel.heightAnchor constraintEqualToConstant:21.0].active = YES;
@@ -169,7 +173,7 @@ static void _logos_method$musicplayer$MRUNowPlayingControlsView$setNeedsLayout(_
 				[songTitleLabel setAlpha:1];
 				[self addSubview:songTitleLabel];
 				{
-				UIColor *customColor = [GcColorPickerUtils colorFromDefaults:@"aquariusprefs" withKey:@"customSubtitleLabelColor"];
+				UIColor *customColor = [GcColorPickerUtils colorFromDefaults:@"aquariusprefs" withKey:@"customSubtitleLabelColor" fallback:@"000000"];
 				[songTitleLabel setTextColor:customColor];
 				}
 				[songTitleLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
@@ -200,8 +204,8 @@ static void _logos_method$musicplayer$MRUNowPlayingControlsView$setNeedsLayout(_
 			[artistNameLabel setTextAlignment:NSTextAlignmentLeft];
 			[artistNameLabel setAlpha:1];
 			[self addSubview:artistNameLabel];
-			[GcColorPickerUtils colorFromDefaults:@"aquariusprefs" withKey:@"customTitleLabelColor"];
-			[songTitleLabel setTextColor:customColor];
+			UIColor *customColor = [GcColorPickerUtils colorFromDefaults:@"aquariusprefs" withKey:@"customTitleLabelColor"];
+			[artistNameLabel setTextColor:customColor];
 			[artistNameLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
 			[artistNameLabel.widthAnchor constraintEqualToConstant:230].active = YES;
 			[artistNameLabel.heightAnchor constraintEqualToConstant:21.0].active = YES;
@@ -214,8 +218,8 @@ static void _logos_method$musicplayer$MRUNowPlayingControlsView$setNeedsLayout(_
 			[songTitleLabel setTextAlignment:NSTextAlignmentLeft];
 			[songTitleLabel setAlpha:1];
 			[self addSubview:songTitleLabel];
-			if (musicPlayerColorsEnabled) {
-				UIColor *customColor = [GcColorPickerUtils colorFromDefaults:@"aquariusprefs" withKey:@"customSubtitleColor"];
+			{
+				UIColor *customColor = [GcColorPickerUtils colorFromDefaults:@"aquariusprefs" withKey:@"customSubtitleLabelColor"];
 				[songTitleLabel setTextColor:customColor];
 			}
 			[songTitleLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
@@ -277,13 +281,17 @@ static void _logos_method$musicplayer$CSAdjunctItemView$_updateSizeToMimic(_LOGO
 	_logos_orig$musicplayer$CSAdjunctItemView$_updateSizeToMimic(self, _cmd);
 PLPlatterView *platterView = (PLPlatterView*)MSHookIvar<UIView*>(self, "_platterView");
 [platterView.backgroundView setAlpha: musicPlayerAlpha];
-
 if(configurations == 0){
 
  if (haveOutline){
   self.layer.borderWidth = outlineSize;
-  UIColor *customColor = [GcColorPickerUtils colorFromDefaults:@"aquariusprefs" withKey:@"outlineColor"];
+ if (!haveOutlineSecondaryColorMusicPlayer){
+ UIColor *customColor = [GcColorPickerUtils colorFromDefaults:@"aquariusprefs" withKey:@"outlineColor"];
   self.layer.borderColor = [customColor CGColor];
+  }
+  else {
+	
+  }
   self.layer.cornerRadius = 10;
   }
 [self.heightAnchor constraintEqualToConstant:115].active = true; 
@@ -305,9 +313,11 @@ songBackground = [UIButton new];
 if (isBackgroundColored){
  [platterView.backgroundView setAlpha: 0];
   coloredBackground = [UIView new];
+  coloredBackground.hidden = NO;
   [coloredBackground setFrame: CGRectMake(self.frame.origin.x,self.frame.origin.y,self.frame.size.width,self.frame.size.height)];
   [coloredBackground.layer setCornerRadius:10];
   [coloredBackground setAlpha:musicPlayerAlpha];
+  [coloredBackground setBackgroundColor:[UIColor clearColor]];
   [self addSubview: coloredBackground];
   [self sendSubviewToBack:coloredBackground];
 }
@@ -319,12 +329,17 @@ else if(configurations == 1 || configurations == 2){
 
    if (haveOutline){
   self.layer.borderWidth = outlineSize;
-UIColor *customColor = [GcColorPickerUtils colorFromDefaults:@"aquariusprefs" withKey:@"outlineColor"];
-  self.layer.borderColor = [ customColor CGColor];
+if (!haveOutlineSecondaryColorMusicPlayer){
+ UIColor *customColor = [GcColorPickerUtils colorFromDefaults:@"aquariusprefs" withKey:@"outlineColor"];
+  self.layer.borderColor = [customColor CGColor];
+  }
+  else {
+	   
+  }
   self.layer.cornerRadius = 10;
   }
 [self.heightAnchor constraintEqualToConstant:130].active = true;
-
+if (isArtworkBackground){
 songBackground = [UIButton new];
  [platterView.backgroundView setAlpha: 0];
 [songBackground setContentMode:UIViewContentModeScaleAspectFill];
@@ -337,14 +352,16 @@ songBackground = [UIButton new];
 [songBackground setAlpha:musicPlayerAlpha];
 [songBackground setTranslatesAutoresizingMaskIntoConstraints:YES];
 [songBackground setFrame: CGRectMake(self.frame.origin.x,self.frame.origin.y,self.frame.size.width,self.frame.size.height)];
-
+}
 
 if (isBackgroundColored){
  [platterView.backgroundView setAlpha: 0];
   coloredBackground = [UIView new];
+    coloredBackground.hidden = NO;
   [coloredBackground setFrame: CGRectMake(self.frame.origin.x,self.frame.origin.y,self.frame.size.width,self.frame.size.height)];
   [coloredBackground.layer setCornerRadius:10];
   [coloredBackground setAlpha:musicPlayerAlpha];
+  [coloredBackground setBackgroundColor:[UIColor clearColor]];
   [self addSubview: coloredBackground];
   [self sendSubviewToBack:coloredBackground];
 }
@@ -352,13 +369,21 @@ if (isBackgroundColored){
 
 }
 else if(configurations == 3){
+	[self.heightAnchor constraintEqualToConstant:100].active = true;
   if (haveOutline){
   self.layer.borderWidth = outlineSize;
+  if (!haveOutlineSecondaryColorMusicPlayer){
  UIColor *customColor = [GcColorPickerUtils colorFromDefaults:@"aquariusprefs" withKey:@"outlineColor"];
   self.layer.borderColor = [customColor CGColor];
+  }
+  else {
+	    
+  }
   self.layer.cornerRadius = 10;
   }
-  [self.heightAnchor constraintEqualToConstant:100].active = true;
+}
+
+  
 if (isArtworkBackground){
    [platterView.backgroundView setAlpha: 0];
 songBackground = [UIButton new];
@@ -370,22 +395,24 @@ songBackground = [UIButton new];
 [self addSubview:songBackground];
 [self sendSubviewToBack: songBackground];
 [songBackground setTranslatesAutoresizingMaskIntoConstraints:YES];
-
 [songBackground setFrame: CGRectMake(self.frame.origin.x,self.frame.origin.y,self.frame.size.width,self.frame.size.height)];
 }
 
 if (isBackgroundColored){
  [platterView.backgroundView setAlpha: 0];
-  coloredBackground = [UIView new];
+  coloredBackground = [[UIView alloc]init];
+  coloredBackground.hidden = NO;
   [coloredBackground setFrame: CGRectMake(self.frame.origin.x,self.frame.origin.y,self.frame.size.width,self.frame.size.height)];
   [coloredBackground.layer setCornerRadius:10];
   [coloredBackground setAlpha:musicPlayerAlpha];
+  [coloredBackground setBackgroundColor:[UIColor clearColor]];
   [self addSubview: coloredBackground];
   [self sendSubviewToBack:coloredBackground];
 }
 
 }
-}
+
+
 
 
 
@@ -395,21 +422,22 @@ static void _logos_method$musicplayer$SBMediaController$setNowPlayingInfo$(_LOGO
     MRMediaRemoteGetNowPlayingInfo(dispatch_get_main_queue(), ^(CFDictionaryRef information) {
         if (information) {
 			NSDictionary *dict = (__bridge NSDictionary *)information;
-
 			currentArtwork = [UIImage imageWithData:[dict objectForKey:(__bridge NSString*)kMRMediaRemoteNowPlayingInfoArtworkData]]; 
 			if (dict) {
 				[songTitleLabel setText:[NSString stringWithFormat:@"%@ ", [dict objectForKey:(__bridge NSString*)kMRMediaRemoteNowPlayingInfoTitle]]]; 
 				lastArtworkData = [dict objectForKey:(__bridge NSString*)kMRMediaRemoteNowPlayingInfoArtworkData];
-
 				[artistNameLabel setText:[NSString stringWithFormat:@"%@ - %@ ", [dict objectForKey:(__bridge NSString*)kMRMediaRemoteNowPlayingInfoArtist], [dict objectForKey:(__bridge NSString*)kMRMediaRemoteNowPlayingInfoAlbum]]]; 
-			 
-
 				subtitleLabel = [NSString stringWithFormat:@"%@ - %@ ", [dict objectForKey:(__bridge NSString*)kMRMediaRemoteNowPlayingInfoArtist], [dict objectForKey:(__bridge NSString*)kMRMediaRemoteNowPlayingInfoAlbum]];
 				songLabel = [NSString stringWithFormat:@"%@ ", [dict objectForKey:(__bridge NSString*)kMRMediaRemoteNowPlayingInfoTitle]];
-
 				[songBackground setImage:currentArtwork forState:UIControlStateNormal];
 				[songImageForSmall setImage:currentArtwork forState:UIControlStateNormal]; 
+				if (coloredBackground){
 				[coloredBackground setBackgroundColor:[libKitten primaryColor:currentArtwork]];
+				coloredBackground.layer.borderColor = [[libKitten primaryColor:currentArtwork] CGColor];
+				}
+				
+				
+				
 			}
 			lastArtworkData = [dict objectForKey:(__bridge NSString*)kMRMediaRemoteNowPlayingInfoArtworkData];
         }
@@ -514,9 +542,56 @@ static void _logos_method$statusbar$_UIStatusBarStringView$setTextColor$(_LOGOS_
 
 
 
+static void (*_logos_orig$notifications$NCNotificationListCell$layoutSubviews)(_LOGOS_SELF_TYPE_NORMAL NCNotificationListCell* _LOGOS_SELF_CONST, SEL); static void _logos_method$notifications$NCNotificationListCell$layoutSubviews(_LOGOS_SELF_TYPE_NORMAL NCNotificationListCell* _LOGOS_SELF_CONST, SEL); static void (*_logos_orig$notifications$NCNotificationContentView$setNeedsLayout)(_LOGOS_SELF_TYPE_NORMAL NCNotificationContentView* _LOGOS_SELF_CONST, SEL); static void _logos_method$notifications$NCNotificationContentView$setNeedsLayout(_LOGOS_SELF_TYPE_NORMAL NCNotificationContentView* _LOGOS_SELF_CONST, SEL); static void (*_logos_orig$notifications$PLPlatterHeaderContentView$setNeedsLayout)(_LOGOS_SELF_TYPE_NORMAL PLPlatterHeaderContentView* _LOGOS_SELF_CONST, SEL); static void _logos_method$notifications$PLPlatterHeaderContentView$setNeedsLayout(_LOGOS_SELF_TYPE_NORMAL PLPlatterHeaderContentView* _LOGOS_SELF_CONST, SEL); static void (*_logos_orig$notifications$NCNotificationShortLookView$setNeedsLayout)(_LOGOS_SELF_TYPE_NORMAL NCNotificationShortLookView* _LOGOS_SELF_CONST, SEL); static void _logos_method$notifications$NCNotificationShortLookView$setNeedsLayout(_LOGOS_SELF_TYPE_NORMAL NCNotificationShortLookView* _LOGOS_SELF_CONST, SEL); 
+
+static void _logos_method$notifications$NCNotificationListCell$layoutSubviews(_LOGOS_SELF_TYPE_NORMAL NCNotificationListCell* _LOGOS_SELF_CONST __unused self, SEL __unused _cmd){
+	_logos_orig$notifications$NCNotificationListCell$layoutSubviews(self, _cmd);
+	if (isNotificationSectionEnabled){
+	self.backgroundColor = [UIColor clearColor];
+	}
+
+}
+
+
+
+
+static void _logos_method$notifications$NCNotificationContentView$setNeedsLayout(_LOGOS_SELF_TYPE_NORMAL NCNotificationContentView* _LOGOS_SELF_CONST __unused self, SEL __unused _cmd){
+	_logos_orig$notifications$NCNotificationContentView$setNeedsLayout(self, _cmd);
+	if (hideSnapImage){
+	UIImageView *replacementSnapImage = (UIImageView*)MSHookIvar<UIImageView*>(self, "_thumbnailImageView");
+	replacementSnapImage.hidden = YES;
+	}
+}
+
+
+
+
+
+
+static void _logos_method$notifications$PLPlatterHeaderContentView$setNeedsLayout(_LOGOS_SELF_TYPE_NORMAL PLPlatterHeaderContentView* _LOGOS_SELF_CONST __unused self, SEL __unused _cmd) {
+	_logos_orig$notifications$PLPlatterHeaderContentView$setNeedsLayout(self, _cmd);
+	iconImage = [self.icons objectAtIndex:0];
+}
+
+
+
+
+
+static void _logos_method$notifications$NCNotificationShortLookView$setNeedsLayout(_LOGOS_SELF_TYPE_NORMAL NCNotificationShortLookView* _LOGOS_SELF_CONST __unused self, SEL __unused _cmd) {
+	_logos_orig$notifications$NCNotificationShortLookView$setNeedsLayout(self, _cmd); 
+	self.backgroundColor = [libKitten primaryColor:iconImage];
+	self.layer.cornerRadius = 15;
+	yesmf = [self.subviews objectAtIndex:0];
+	yesmf.hidden = YES;
+}
+
+
+
+
 void reloadPrefs() { 
 	musicPlayerEnabled = [file boolForKey:@"isMusicSectionEnabled"];
 	statusBarSectionEnabled = [file boolForKey:@"isStausBarSectionEnabled"];
+	hideSnapImage = [file boolForKey:@"hideSnapImage"];
 	isBatteryHidden = [file boolForKey:@"isBatteryHidden"];
 	isWifiThingyHidden = [file boolForKey:@"isWifiHidden"];
 	isCellularThingyHidden = [file boolForKey:@"isCellularHidden"];
@@ -531,14 +606,18 @@ void reloadPrefs() {
 	showPercentage = [file boolForKey:@"showPercentage"]; 
 	isBackgroundColored = [file boolForKey:@"isBackgroundColorEnabled"];
 	isArtworkBackground = [file boolForKey:@"isArtworkBackground"];
+	isNotificationSectionEnabled = [file boolForKey:@"isNotificationSectionEnabled"];
 	haveOutline = [file boolForKey:@"haveOutline?"];
 	outlineSize = [file doubleForKey:@"sizeOfOutline?"];
+	haveOutline = [file boolForKey:@"haveOutline?"];
+	haveOutlineSecondaryColorMusicPlayer = [file boolForKey:@"haveOutlineSecondaryColorMusicPlayer"];
 }
 
-static __attribute__((constructor)) void _logosLocalCtor_30e4512a(int __unused argc, char __unused **argv, char __unused **envp) {
+static __attribute__((constructor)) void _logosLocalCtor_71141b66(int __unused argc, char __unused **argv, char __unused **envp) {
 	HBPreferences *file = [[HBPreferences alloc] initWithIdentifier:@"aquariusprefs"];
 	[file registerBool:&musicPlayerEnabled default:YES forKey:@"isMusicSectionEnabled"];
 	[file registerBool:&isTimeHidden default:NO forKey:@"isTimeHidden"];
+	[file registerBool:&hideSnapImage default:YES forKey:@"hideSnapImage"];
 	[file registerBool:&isBatteryHidden default:NO forKey:@"isBatteryHidden"];
 	[file registerBool:&isCellularThingyHidden default:NO forKey:@"isCellularHidden"];
 	[file registerBool:&isWifiThingyHidden default:NO forKey:@"isWifiHidden"];
@@ -554,8 +633,14 @@ static __attribute__((constructor)) void _logosLocalCtor_30e4512a(int __unused a
 	[file registerBool:&isArtworkBackground default:NO forKey:@"isArtworkBackground"];
 	[file registerBool:&haveOutline default:NO forKey:@"haveOutline?"];
 	[file registerBool:&showPercentage default:NO forKey:@"showPercentage"];
+	[file registerBool:&isNotificationSectionEnabled default:NO forKey:@"isNotificationSectionEnabled"];
 	[file registerDouble:&outlineSize default:5 forKey:@"sizeOfOutline?"];
+	[file registerBool:&haveOutlineSecondaryColorMusicPlayer default:NO forKey:@"haveOutlineSecondaryColorMusicPlayer"];
+			
 
+ 	if (isNotificationSectionEnabled) {
+	 	{Class _logos_class$notifications$NCNotificationListCell = objc_getClass("NCNotificationListCell"); { MSHookMessageEx(_logos_class$notifications$NCNotificationListCell, @selector(layoutSubviews), (IMP)&_logos_method$notifications$NCNotificationListCell$layoutSubviews, (IMP*)&_logos_orig$notifications$NCNotificationListCell$layoutSubviews);}Class _logos_class$notifications$NCNotificationContentView = objc_getClass("NCNotificationContentView"); { MSHookMessageEx(_logos_class$notifications$NCNotificationContentView, @selector(setNeedsLayout), (IMP)&_logos_method$notifications$NCNotificationContentView$setNeedsLayout, (IMP*)&_logos_orig$notifications$NCNotificationContentView$setNeedsLayout);}Class _logos_class$notifications$PLPlatterHeaderContentView = objc_getClass("PLPlatterHeaderContentView"); { MSHookMessageEx(_logos_class$notifications$PLPlatterHeaderContentView, @selector(setNeedsLayout), (IMP)&_logos_method$notifications$PLPlatterHeaderContentView$setNeedsLayout, (IMP*)&_logos_orig$notifications$PLPlatterHeaderContentView$setNeedsLayout);}Class _logos_class$notifications$NCNotificationShortLookView = objc_getClass("NCNotificationShortLookView"); { MSHookMessageEx(_logos_class$notifications$NCNotificationShortLookView, @selector(setNeedsLayout), (IMP)&_logos_method$notifications$NCNotificationShortLookView$setNeedsLayout, (IMP*)&_logos_orig$notifications$NCNotificationShortLookView$setNeedsLayout);}}
+ 	}
 	if (musicPlayerEnabled) {
         {Class _logos_class$musicplayer$MRUNowPlayingHeaderView = objc_getClass("MRUNowPlayingHeaderView"); { MSHookMessageEx(_logos_class$musicplayer$MRUNowPlayingHeaderView, @selector(setShowRoutingButton:), (IMP)&_logos_method$musicplayer$MRUNowPlayingHeaderView$setShowRoutingButton$, (IMP*)&_logos_orig$musicplayer$MRUNowPlayingHeaderView$setShowRoutingButton$);}Class _logos_class$musicplayer$MRUNowPlayingControlsView = objc_getClass("MRUNowPlayingControlsView"); { MSHookMessageEx(_logos_class$musicplayer$MRUNowPlayingControlsView, @selector(setNeedsLayout), (IMP)&_logos_method$musicplayer$MRUNowPlayingControlsView$setNeedsLayout, (IMP*)&_logos_orig$musicplayer$MRUNowPlayingControlsView$setNeedsLayout);}Class _logos_class$musicplayer$MRUNowPlayingLabelView = objc_getClass("MRUNowPlayingLabelView"); { MSHookMessageEx(_logos_class$musicplayer$MRUNowPlayingLabelView, @selector(setFrame:), (IMP)&_logos_method$musicplayer$MRUNowPlayingLabelView$setFrame$, (IMP*)&_logos_orig$musicplayer$MRUNowPlayingLabelView$setFrame$);}Class _logos_class$musicplayer$MRUNowPlayingTransportControlsView = objc_getClass("MRUNowPlayingTransportControlsView"); { MSHookMessageEx(_logos_class$musicplayer$MRUNowPlayingTransportControlsView, @selector(setNeedsLayout), (IMP)&_logos_method$musicplayer$MRUNowPlayingTransportControlsView$setNeedsLayout, (IMP*)&_logos_orig$musicplayer$MRUNowPlayingTransportControlsView$setNeedsLayout);}Class _logos_class$musicplayer$CSAdjunctItemView = objc_getClass("CSAdjunctItemView"); { MSHookMessageEx(_logos_class$musicplayer$CSAdjunctItemView, @selector(_updateSizeToMimic), (IMP)&_logos_method$musicplayer$CSAdjunctItemView$_updateSizeToMimic, (IMP*)&_logos_orig$musicplayer$CSAdjunctItemView$_updateSizeToMimic);}Class _logos_class$musicplayer$SBMediaController = objc_getClass("SBMediaController"); { MSHookMessageEx(_logos_class$musicplayer$SBMediaController, @selector(setNowPlayingInfo:), (IMP)&_logos_method$musicplayer$SBMediaController$setNowPlayingInfo$, (IMP*)&_logos_orig$musicplayer$SBMediaController$setNowPlayingInfo$);}}
 	}

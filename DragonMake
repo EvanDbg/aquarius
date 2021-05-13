@@ -1,5 +1,5 @@
 
-name: Aquarius 
+name: aquarius 
 all:
     archs:
         - arm64

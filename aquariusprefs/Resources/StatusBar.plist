@@ -61,23 +61,19 @@
     <key>cell</key>
     <string>PSLinkCell</string>
     <key>cellClass</key>
-    <string>SparkColourPickerCell</string>
-    <key>libsparkcolourpicker</key>
-    <dict>
-        <key>defaults</key>
-        <string>aquariusprefs</string>
-        <key>PostNotification</key>
-        <string>com.nico671.preferenceschanged</string>
-        <key>fallback</key>
-        <string>#000000</string>
-        <key>alpha</key>
-        <true/>
-    </dict>
+    <string>GcColorPickerCell</string>
     <key>label</key>
-    <string>Status Bar Text Tint Color</string>
+    <string>Custom Time Color</string>
+    <key>defaults</key>
+    <string>aquariusprefs</string>
     <key>key</key>
     <string>timeColor</string>
-    </dict>
+    <key>supportsAlpha</key>
+    <true/>
+    <key>fallback</key>
+    <string>ffffffff</string>
+</dict>
+
 <dict>
     <key>cell</key>
     <string>PSGroupCell</string>
@@ -100,25 +96,19 @@
     <key>cell</key>
     <string>PSLinkCell</string>
     <key>cellClass</key>
-    <string>SparkColourPickerCell</string>
-    <key>libsparkcolourpicker</key>
-    <dict>
-        <key>defaults</key>
-        <string>aquariusprefs</string>
-        <key>PostNotification</key>
-        <string>com.nico671.preferenceschanged</string>
-        <key>fallback</key>
-        <string>#000000</string>
-        <key>alpha</key>
-        <true/>
-    </dict>
+    <string>GcColorPickerCell</string>
     <key>label</key>
     <string>Battery Tint Color</string>
+    <key>defaults</key>
+    <string>aquariusprefs</string>
     <key>key</key>
     <string>batteryFillColor</string>
-    </dict>
-   
-          
+    <key>supportsAlpha</key>
+    <true/>
+    <key>fallback</key>
+    <string>ffffffff</string>
+</dict>
+            
 <dict>
     <key>cell</key>
     <string>PSGroupCell</string>
@@ -152,28 +142,23 @@
     <key>id</key>
 	<string>cellularHidden</string>
 </dict>
-<dict>
-    <key>cell</key>
-    <string>PSLinkCell</string>
-    <key>cellClass</key>
-    <string>SparkColourPickerCell</string>
-    <key>libsparkcolourpicker</key>
+
     <dict>
+        <key>cell</key>
+        <string>PSLinkCell</string>
+        <key>cellClass</key>
+        <string>GcColorPickerCell</string>
+        <key>label</key>
+        <string>Wifi and Cellular Tint Color</string>
         <key>defaults</key>
         <string>aquariusprefs</string>
-        <key>PostNotification</key>
-        <string>com.nico671.preferenceschanged</string>
-        <key>fallback</key>
-        <string>#000000</string>
-        <key>alpha</key>
+        <key>key</key>
+        <string>cellularColor</string>
+        <key>supportsAlpha</key>
         <true/>
+        <key>fallback</key>
+        <string>ffffffff</string>
     </dict>
-    <key>label</key>
-    <string>Bars Tint Color</string>
-    <key>key</key>
-    <string>cellularColor</string>
-    </dict>
-
 </array>
 <key>title</key>
 <string>Aquarius</string>

@@ -7,8 +7,8 @@ include $(THEOS)/makefiles/common.mk
 
 TWEAK_NAME = aquarius
 
-aquarius_FILES = Tweak.xm MarqueeLabel.m
-aquarius_FRAMEWORKS = CoreGraphics QuartzCore UIKit Foundation AVKit
+aquarius_FILES = Tweak.xm MarqueeLabel.m 
+aquarius_FRAMEWORKS = CoreGraphics QuartzCore UIKit Foundation AVKit $(inherited)
 aquarius_PRIVATE_FRAMEWORKS = MediaRemote 
 aquarius_LIBRARIES = kitten bulletin gcuniversal
 aquarius_CFLAGS = -fobjc-arc

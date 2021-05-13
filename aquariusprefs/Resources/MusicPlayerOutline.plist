@@ -64,7 +64,21 @@
 			<key>PostNotification</key>
 			<string>com.nico671.preferenceschanged</string>
 		</dict>
-
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<false/>
+			<key>defaults</key>
+			<string>aquariusprefs</string>
+			<key>PostNotification</key>
+			<string>com.nico671.preferenceschanged</string>
+			<key>key</key>
+			<string>haveOutlineSecondaryColorMusicPlayer</string>
+			<key>label</key>
+			<string>Use secondary album color as the outline color</string>
+		</dict>
+	
 	</array>
 	<key>title</key>
 	<string>Outline</string>
