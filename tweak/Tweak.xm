@@ -1,6 +1,5 @@
 #import "headers.h"
 %group musicplayer
-//TODO:fucking fix your stupid goddamn colors u dunce
 %hook MRUNowPlayingHeaderView // hides the little routing button
 - (void)setShowRoutingButton:(BOOL)arg1 {
 	MRUNowPlayingViewController *controller = (MRUNowPlayingViewController *)[self _viewControllerForAncestor];
@@ -389,17 +388,13 @@ if (isBackgroundColored){
 				songLabel = [NSString stringWithFormat:@"%@ ", [dict objectForKey:(__bridge NSString*)kMRMediaRemoteNowPlayingInfoTitle]];
 				[songBackground setImage:currentArtwork forState:UIControlStateNormal];
 				[songImageForSmall setImage:currentArtwork forState:UIControlStateNormal]; 
+				fuckingArtworkColor = [libKitten primaryColor:currentArtwork];
+				fuckingArtworkColor2 = [libKitten secondaryColor:currentArtwork];
+	
 				[[NSNotificationCenter defaultCenter] postNotificationName:@"com.nico671.updateColors" object:nil];
-				AquariusColorManager * manager = [[AquariusColorManager alloc]init];
-				colorDict = [manager coloursForImage:currentArtwork forEdge:3];
-				fuckingArtworkColor = [colorDict objectForKey:@"background"];
-				fuckingArtworkColor2 = [colorDict objectForKey:@"primary"];
-				
 			}
-			lastArtworkData = [dict objectForKey:(__bridge NSString*)kMRMediaRemoteNowPlayingInfoArtworkData];
         }
   	});
-
 	if (haveNotifs) {
 			if (![songLabel isEqualToString:previousTitle]){
 			[[objc_getClass("JBBulletinManager") sharedInstance] showBulletinWithTitle:subtitleLabel message:songLabel bundleID:[[[%c(SBMediaController) sharedInstance] nowPlayingApplication] bundleIdentifier]];
@@ -511,7 +506,6 @@ UIColor *customColor = [GcColorPickerUtils colorFromDefaults:@"aquariusprefs" wi
 %end
 
 %hook NCNotificationContentView
-
 -(void)setNeedsLayout{
 	%orig;
 	if (hideSnapImage){
@@ -519,32 +513,70 @@ UIColor *customColor = [GcColorPickerUtils colorFromDefaults:@"aquariusprefs" wi
 	replacementSnapImage.hidden = YES;
 	}
 }
-
 %end
 
-
 %hook PLPlatterHeaderContentView
-
 -(void)setNeedsLayout {
 	%orig;
+	if (colorNotifs){
 	iconImage = [self.icons objectAtIndex:0];
+	}
 }
-
 %end
 
 %hook NCNotificationShortLookView
 
 -(void)setNeedsLayout {
 	%orig; 
+	if (colorNotifs){
 	self.backgroundColor = [libKitten primaryColor:iconImage];
 	self.layer.cornerRadius = 15;
 	yesmf = [self.subviews objectAtIndex:0];
 	yesmf.hidden = YES;
+	}
+	self.layer.maskedCorners = kCALayerMinXMinYCorner | kCALayerMaxXMaxYCorner;
 }
-
 %end
 %end
+/*
+%group callbannertest
+%hook SBInCallBannerPresentableViewController
++(double)cornerRadius{
+	return 1;
+	//NSLog(@"[aquarius] %@",[self.subviews objectAtIndex:0]);
+}
+-(BOOL)_canShowWhileLocked{
+	return YES;
+}
+%end
 
+
+%end
+*/
+%group springy
+%hook SBIconProgressView //progressbar
+-(void)_drawPieWithCenter:(CGPoint)arg1{
+    UIProgressView *progressView;
+	progressView = [[UIProgressView alloc] initWithProgressViewStyle:UIProgressViewStyleDefault];
+	progressView.progressTintColor = [UIColor cyanColor];
+	[progressView.layer setFrame:CGRectMake(self.center.x-25, self.center.y+15, 50, 7.5)];
+	progressView.trackTintColor = [UIColor systemGrayColor];
+	[progressView setProgress:self.displayedFraction animated:NO];
+	[[progressView layer]setCornerRadius:5];	
+	[[progressView layer]setMasksToBounds:TRUE];
+	progressView.clipsToBounds = YES;
+	[self addSubview:progressView];
+	[self bringSubviewToFront: progressView];
+}
+-(void)_drawPauseUIWithCenter:(CGPoint)arg1{
+	
+}
+-(void)setDisplayedFraction:(CGFloat)arg1{
+	%orig;
+	
+}
+%end
+%end
 void reloadPrefs() { //prefs
 	musicPlayerEnabled = [file boolForKey:@"isMusicSectionEnabled"];
 	statusBarSectionEnabled = [file boolForKey:@"isStausBarSectionEnabled"];
@@ -565,9 +597,12 @@ void reloadPrefs() { //prefs
 	isArtworkBackground = [file boolForKey:@"isArtworkBackground"];
 	isNotificationSectionEnabled = [file boolForKey:@"isNotificationSectionEnabled"];
 	haveOutline = [file boolForKey:@"haveOutline?"];
-	outlineSize = [file doubleForKey:@"sizeOfOutline?"];
-	haveOutline = [file boolForKey:@"haveOutline?"];
+	outlineSize = [file doubleForKey:@"sizeOfOutline"];
 	haveOutlineSecondaryColorMusicPlayer = [file boolForKey:@"haveOutlineSecondaryColorMusicPlayer"];
+	isSpringySectionEnabled = [file boolForKey:@"isSpringySectionEnabled"];
+	downloadBarEnabled = [file boolForKey:@"downloadBarEnabled"];
+	colorNotifs = [file boolForKey:@"colorNotifs"];
+	
 }
 
 %ctor {
@@ -591,10 +626,11 @@ void reloadPrefs() { //prefs
 	[file registerBool:&haveOutline default:NO forKey:@"haveOutline?"];
 	[file registerBool:&showPercentage default:NO forKey:@"showPercentage"];
 	[file registerBool:&isNotificationSectionEnabled default:NO forKey:@"isNotificationSectionEnabled"];
-	[file registerDouble:&outlineSize default:5 forKey:@"sizeOfOutline?"];
+	[file registerDouble:&outlineSize default:5 forKey:@"sizeOfOutline"];
 	[file registerBool:&haveOutlineSecondaryColorMusicPlayer default:NO forKey:@"haveOutlineSecondaryColorMusicPlayer"];
-			
-
+	[file registerBool:&isSpringySectionEnabled default:YES forKey:@"isSpringySectionEnabled"];
+	[file registerBool:&downloadBarEnabled default:NO forKey:@"downloadBarEnabled"];
+	[file registerBool:&colorNotifs default:NO forKey:@"colorNotifs"];
  	if (isNotificationSectionEnabled) {
 	 	%init(notifications);
  	}
@@ -602,8 +638,11 @@ void reloadPrefs() { //prefs
         %init(musicplayer);
 	}
 	if (statusBarSectionEnabled){
-		%init(statusbar)
+		%init(statusbar);
 	}
-	
+	if (isSpringySectionEnabled){
+		%init(springy);
+	}
+	//%init (callbannertest);
 	CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(), NULL, (CFNotificationCallback)reloadPrefs, CFSTR("com.nico671.preferenceschanged"), NULL, CFNotificationSuspensionBehaviorCoalesce);
 }

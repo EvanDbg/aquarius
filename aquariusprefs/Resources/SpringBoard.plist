@@ -4,22 +4,38 @@
 <dict>
 	<key>items</key>
 	<array>
-			<dict>
-				<key>AquariusSub</key>
-				 <string>StatusBar</string>
-				<key>cell</key>
-				<string>PSLinkCell</string>
-				<key>detail</key>
-				<string>STSRootListController</string>
-				<key>icon</key>
-			<string>stausbar.png</string>
-				<key>isController</key>
-				<true/>
-				<key>label</key>
-				<string>Status Bar Settings</string>
-				</dict>
-	  
-   
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+		 </dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<true/>
+			<key>defaults</key>
+			<string>aquariusprefs</string>
+			<key>key</key>
+			<string>isSpringySectionEnabled</string>
+			<key>label</key>
+			<string>Enable SpringBoard Section?</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+		 </dict>
+		 <dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<true/>
+			<key>defaults</key>
+			<string>aquariusprefs</string>
+			<key>key</key>
+			<string>downloadBarEnabled</string>
+			<key>label</key>
+			<string>Enable Download Bar For Icons?</string>
+		</dict>
 	</array>
 	<key>title</key>
 	<string>Aquarius</string>

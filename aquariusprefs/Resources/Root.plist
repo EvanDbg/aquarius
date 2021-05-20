@@ -63,6 +63,22 @@
                     <key>label</key>
                     <string>Notification Settings</string>
                     </dict> 
+                    <dict>
+                        <key>AquariusSub</key>
+                         <string>SpringBoard</string>
+                        <key>cell</key>
+                        <string>PSLinkCell</string>
+                        <key>detail</key>
+                        <string>SPRRootListController</string>
+                        <key>cellClass</key>
+                        <string>XXXSymbolsLinkCell</string>
+                        <key>icon</key>
+                        <string>square.stack.3d.up.fill</string>
+                        <key>isController</key>
+                        <true/>
+                        <key>label</key>
+                        <string>SpringBoard Settings</string>
+                        </dict>
             <dict>
                 <key>cell</key>
                 <string>PSGroupCell</string>

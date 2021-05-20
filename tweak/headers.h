@@ -1,5 +1,4 @@
 #import <Foundation/Foundation.h>
-#import "AquariusColorManager.m"
 #import <CoreText/CoreText.h>
 #import <EventKit/EventKit.h>
 #import <Cephei/HBPreferences.h>
@@ -8,14 +7,29 @@
 #import <objc/runtime.h>
 #import <dlfcn.h>
 #import "JBBulletinManager.h"
-#import <AVKit/AVKit.h>
 #import <MediaRemote/MediaRemote.h>
 #import <AudioToolbox/AudioServices.h>
 #import "GcUniversal/GcColorPickerUtils.h"
 #import "MarqueeLabel.h"
 #import <QuartzCore/QuartzCore.h>
 #import <Kitten/libKitten.h>
-#import <AVKit/AVKit.h>
+#import <UIKit/UIKit.h>
+
+@interface SBIconProgressView : UIView
+@property (nonatomic,assign,readwrite) CGFloat displayedFraction;
+@end
+
+@interface TUCall
+@end
+@interface TUCallCenter : NSObject
++(id)sharedTelephonyManager;
+-(id)initWithQueue:(id)arg1 ;
+@end
+
+@interface SBInCallBannerPresentableViewController
++(double)cornerRadius;
+@property NSArray *subviews;
+@end
 
 @interface NCNotificationListCell : UIView
 @property (nonatomic, copy, readwrite) UIColor *backgroundColor;
@@ -251,8 +265,9 @@
 - (id)initWithControlCenter:(BOOL)controlCenter defaultStyle:(long long)style;
 @end
 
-BOOL musicPlayerEnabled, musicPlayerColorsEnabled, isNotificationSectionEnabled, hideSnapImage, haveOutlineSecondaryColorMusicPlayer;
-BOOL isTimeHidden,showPercentage, modernStatusBar, isCellularThingyHidden, isWifiThingyHidden, isRoutingButtonHidden, isBackgroundColored, isDarkImage, isArtworkBackground, haveNotifs, haveOutline, statusBarSectionEnabled, isBatteryHidden;
+BOOL musicPlayerEnabled, musicPlayerColorsEnabled, isNotificationSectionEnabled, hideSnapImage, haveOutlineSecondaryColorMusicPlayer, isSpringySectionEnabled;
+BOOL isTimeHidden,showPercentage, modernStatusBar, isCellularThingyHidden, isWifiThingyHidden, isRoutingButtonHidden, isBackgroundColored, isDarkImage, isArtworkBackground;
+BOOL haveNotifs, haveOutline, statusBarSectionEnabled, isBatteryHidden, downloadBarEnabled, colorNotifs;
 id preferences, file, yes;
 NSInteger configurations;
 NSString *previousTitle = @"poggers";
@@ -274,5 +289,3 @@ NSString *subtitleLabel;
 UIColor *fuckingArtworkColor;
 UIColor *fuckingArtworkColor2;
 MTMaterialView *yesmf;
-
-NSDictionary* colorDict;
