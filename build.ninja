@@ -44,7 +44,7 @@ optool = $dragondir/bin/optool
 plutil = plutil
 swift = swift
 
-targetvers = 10.0
+targetvers = 14.0
 targetprefix = -miphoneos-version-min=
 targetos = iphoneos
 triple = -target arm64-apple-ios$targetvers

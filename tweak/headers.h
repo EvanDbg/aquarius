@@ -267,11 +267,11 @@
 
 BOOL musicPlayerEnabled, musicPlayerColorsEnabled, isNotificationSectionEnabled, hideSnapImage, haveOutlineSecondaryColorMusicPlayer, isSpringySectionEnabled;
 BOOL isTimeHidden,showPercentage, modernStatusBar, isCellularThingyHidden, isWifiThingyHidden, isRoutingButtonHidden, isBackgroundColored, isDarkImage, isArtworkBackground;
-BOOL haveNotifs, haveOutline, statusBarSectionEnabled, isBatteryHidden, downloadBarEnabled, colorNotifs;
+BOOL haveNotifs, haveOutline, statusBarSectionEnabled, isBatteryHidden, downloadBarEnabled, colorNotifs, leafCornerNotifs, musicPlayerLeafLook;
 id preferences, file, yes;
 NSInteger configurations;
 NSString *previousTitle = @"poggers";
-double musicPlayerAlpha, outlineSize, rightOffsetForText;
+double musicPlayerAlpha, outlineSize, rightOffsetForText, notifCornerRadius, musicPlayerCornerRadius;
 NSDictionary *preferencesDictionary = [NSDictionary dictionaryWithContentsOfFile:@"/var/mobile/Library/Preferences/aquariusprefs.plist"];
 MarqueeLabel* songTitleLabel;
 MarqueeLabel* artistNameLabel;

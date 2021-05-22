@@ -254,14 +254,16 @@
 	%orig;
 	[self setTheFuckUp];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setTheFuckUp) name:@"com.nico671.updateColors" object:nil];
-
-
 }
 
 %new 
 -(void) setTheFuckUp{
 	PLPlatterView *platterView = (PLPlatterView*)MSHookIvar<UIView*>(self, "_platterView");
-[platterView.backgroundView setAlpha: musicPlayerAlpha];
+	[platterView.backgroundView setAlpha: musicPlayerAlpha];
+	self.layer.cornerRadius = musicPlayerCornerRadius;
+if (musicPlayerLeafLook){
+	self.layer.maskedCorners = kCALayerMinXMinYCorner | kCALayerMaxXMaxYCorner;
+}
 if(configurations == 0){
 
  if (haveOutline){
@@ -273,7 +275,7 @@ if(configurations == 0){
   else {
 	self.layer.borderColor = [fuckingArtworkColor2 CGColor];
   }
-  self.layer.cornerRadius = 10;
+  self.layer.cornerRadius = musicPlayerCornerRadius;
   }
 [self.heightAnchor constraintEqualToConstant:115].active = true; //height
 if (isArtworkBackground){
@@ -282,7 +284,7 @@ songBackground = [UIButton new];
 [songBackground setClipsToBounds:YES];
 [songBackground setAdjustsImageWhenHighlighted:NO];
 [songBackground setAlpha:musicPlayerAlpha];
-[songBackground.layer setCornerRadius:8];
+[songBackground.layer setCornerRadius:musicPlayerCornerRadius];
  [platterView.backgroundView setAlpha: 0];
 [self addSubview:songBackground];
 [self sendSubviewToBack: songBackground];
@@ -310,7 +312,7 @@ if (!haveOutlineSecondaryColorMusicPlayer){
   else {
 	    self.layer.borderColor = [fuckingArtworkColor2 CGColor];
   }
-  self.layer.cornerRadius = 10;
+  self.layer.cornerRadius = musicPlayerCornerRadius;
   }
 [self.heightAnchor constraintEqualToConstant:130].active = true;
 if (isArtworkBackground){
@@ -320,7 +322,7 @@ songBackground = [UIButton new];
 [songBackground setClipsToBounds:YES];
 [songBackground setAdjustsImageWhenHighlighted:NO];
 [songBackground setAlpha:musicPlayerAlpha];
-[songBackground.layer setCornerRadius:8];
+[songBackground.layer setCornerRadius:musicPlayerCornerRadius];
 [self addSubview:songBackground];
 [self sendSubviewToBack: songBackground];
 [songBackground setAlpha:musicPlayerAlpha];
@@ -346,7 +348,7 @@ else if(configurations == 3){
   else {
 	    self.layer.borderColor = [fuckingArtworkColor2 CGColor];
   }
-  self.layer.cornerRadius = 10;
+  self.layer.cornerRadius = musicPlayerCornerRadius;
   }
 }
 
@@ -358,7 +360,7 @@ songBackground = [UIButton new];
 [songBackground setClipsToBounds:YES];
 [songBackground setAdjustsImageWhenHighlighted:NO];
 [songBackground setAlpha:musicPlayerAlpha];
-[songBackground.layer setCornerRadius:8];
+[songBackground.layer setCornerRadius:musicPlayerCornerRadius];
 [self addSubview:songBackground];
 [self sendSubviewToBack: songBackground];
 [songBackground setTranslatesAutoresizingMaskIntoConstraints:YES];
@@ -369,6 +371,7 @@ if (isBackgroundColored){
  [platterView.backgroundView setAlpha: 0];
     self.backgroundColor = fuckingArtworkColor;
 }
+
 }
 
 %end
@@ -530,10 +533,11 @@ UIColor *customColor = [GcColorPickerUtils colorFromDefaults:@"aquariusprefs" wi
 	%orig; 
 	if (colorNotifs){
 	self.backgroundColor = [libKitten primaryColor:iconImage];
-	self.layer.cornerRadius = 15;
+	self.layer.cornerRadius = notifCornerRadius;
 	yesmf = [self.subviews objectAtIndex:0];
 	yesmf.hidden = YES;
 	}
+	if (leafCornerNotifs)
 	self.layer.maskedCorners = kCALayerMinXMinYCorner | kCALayerMaxXMaxYCorner;
 }
 %end
@@ -571,16 +575,13 @@ UIColor *customColor = [GcColorPickerUtils colorFromDefaults:@"aquariusprefs" wi
 -(void)_drawPauseUIWithCenter:(CGPoint)arg1{
 	
 }
--(void)setDisplayedFraction:(CGFloat)arg1{
-	%orig;
-	
-}
 %end
 %end
 void reloadPrefs() { //prefs
 	musicPlayerEnabled = [file boolForKey:@"isMusicSectionEnabled"];
 	statusBarSectionEnabled = [file boolForKey:@"isStausBarSectionEnabled"];
 	hideSnapImage = [file boolForKey:@"hideSnapImage"];
+	leafCornerNotifs = [file boolForKey:@"leafCornerNotifs"];
 	isBatteryHidden = [file boolForKey:@"isBatteryHidden"];
 	isWifiThingyHidden = [file boolForKey:@"isWifiHidden"];
 	isCellularThingyHidden = [file boolForKey:@"isCellularHidden"];
@@ -598,10 +599,13 @@ void reloadPrefs() { //prefs
 	isNotificationSectionEnabled = [file boolForKey:@"isNotificationSectionEnabled"];
 	haveOutline = [file boolForKey:@"haveOutline?"];
 	outlineSize = [file doubleForKey:@"sizeOfOutline"];
+	musicPlayerCornerRadius = [file doubleForKey:@"musicPlayerCornerRadius"];
+	notifCornerRadius = [file doubleForKey:@"notifCornerRadius"];
 	haveOutlineSecondaryColorMusicPlayer = [file boolForKey:@"haveOutlineSecondaryColorMusicPlayer"];
 	isSpringySectionEnabled = [file boolForKey:@"isSpringySectionEnabled"];
 	downloadBarEnabled = [file boolForKey:@"downloadBarEnabled"];
 	colorNotifs = [file boolForKey:@"colorNotifs"];
+	musicPlayerLeafLook = [file boolForKey:@"musicPlayerLeafLook"];
 	
 }
 
@@ -627,10 +631,14 @@ void reloadPrefs() { //prefs
 	[file registerBool:&showPercentage default:NO forKey:@"showPercentage"];
 	[file registerBool:&isNotificationSectionEnabled default:NO forKey:@"isNotificationSectionEnabled"];
 	[file registerDouble:&outlineSize default:5 forKey:@"sizeOfOutline"];
+	[file registerDouble:&musicPlayerCornerRadius default:5 forKey:@"musicPlayerCornerRadius"];
+	[file registerDouble:&notifCornerRadius default:5 forKey:@"notifsCornerRadius"];
 	[file registerBool:&haveOutlineSecondaryColorMusicPlayer default:NO forKey:@"haveOutlineSecondaryColorMusicPlayer"];
 	[file registerBool:&isSpringySectionEnabled default:YES forKey:@"isSpringySectionEnabled"];
 	[file registerBool:&downloadBarEnabled default:NO forKey:@"downloadBarEnabled"];
 	[file registerBool:&colorNotifs default:NO forKey:@"colorNotifs"];
+	[file registerBool:&leafCornerNotifs default:NO forKey:@"leafCornerNotifs"];
+	 [file registerBool:&musicPlayerLeafLook default:NO forKey:@"musicPlayerLeafLook"];
  	if (isNotificationSectionEnabled) {
 	 	%init(notifications);
  	}

@@ -1,11 +1,13 @@
 
-name: aquarius 
+name: aquarius
+icmd: sbreload 
 all:
     archs:
         - arm64
         - arm64e
 aquarius:
     type: tweak 
+    targetios: 14.0
     dir: tweak
     files:
         - MarqueeLabel.m
@@ -24,6 +26,8 @@ aquariusprefs:
     type: prefs
     dir: aquariusprefs
     targetios: 14.0
+    libs:
+        - gcuniversal
     files:
         - AQRRootListController.m
         - CLCRootListController.m
