@@ -20,7 +20,7 @@
 #define _LOGOS_RETURN_RETAINED
 #endif
 
-@class MRUNowPlayingHeaderView; @class SBMediaController; @class _UIStatusBarStringView; @class _UIStatusBarSignalView; @class MRUNowPlayingTransportControlsView; @class _UIStatusBar; @class NCNotificationListCell; @class _UIStatusBarVisualProvider_Split54; @class _UIStatusBarWifiSignalView; @class SBIconProgressView; @class MRUNowPlayingLabelView; @class NCNotificationContentView; @class CSAdjunctItemView; @class PLPlatterHeaderContentView; @class _UIStatusBarCellularSignalView; @class _UIBatteryView; @class NCNotificationShortLookView; @class MRUNowPlayingControlsView; 
+@class _UIStatusBarWifiSignalView; @class SBMediaController; @class _UIStatusBar; @class SBIconProgressView; @class MRUNowPlayingTransportControlsView; @class NCNotificationShortLookView; @class MRUNowPlayingHeaderView; @class NCNotificationContentView; @class _UIStatusBarCellularSignalView; @class MRUNowPlayingControlsView; @class PLPlatterHeaderContentView; @class NCNotificationListCell; @class _UIBatteryView; @class _UIStatusBarVisualProvider_Split54; @class CSAdjunctItemView; @class _UIStatusBarStringView; @class MRUNowPlayingLabelView; @class _UIStatusBarSignalView; 
 
 static __inline__ __attribute__((always_inline)) __attribute__((unused)) Class _logos_static_class_lookup$SBMediaController(void) { static Class _klass; if(!_klass) { _klass = objc_getClass("SBMediaController"); } return _klass; }
 #line 1 "Tweak.xm"

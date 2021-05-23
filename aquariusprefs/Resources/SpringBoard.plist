@@ -36,6 +36,18 @@
 			<key>label</key>
 			<string>Enable Download Bar For Icons?</string>
 		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<false/>
+			<key>defaults</key>
+			<string>aquariusprefs</string>
+			<key>key</key>
+			<string>hideLabels</string>
+			<key>label</key>
+			<string>Hide Labels?</string>
+		</dict>
 	</array>
 	<key>title</key>
 	<string>Aquarius</string>

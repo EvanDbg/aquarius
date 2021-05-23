@@ -15,6 +15,11 @@
 #import <Kitten/libKitten.h>
 #import <UIKit/UIKit.h>
 
+@interface SBIconView
+@property (nonatomic, assign, readwrite, getter=isLabelHidden) BOOL labelHidden;
+@end
+@interface SBIconListView
+@end
 @interface SBIconProgressView : UIView
 @property (nonatomic,assign,readwrite) CGFloat displayedFraction;
 @end
@@ -268,6 +273,7 @@
 BOOL musicPlayerEnabled, musicPlayerColorsEnabled, isNotificationSectionEnabled, hideSnapImage, haveOutlineSecondaryColorMusicPlayer, isSpringySectionEnabled;
 BOOL isTimeHidden,showPercentage, modernStatusBar, isCellularThingyHidden, isWifiThingyHidden, isRoutingButtonHidden, isBackgroundColored, isDarkImage, isArtworkBackground;
 BOOL haveNotifs, haveOutline, statusBarSectionEnabled, isBatteryHidden, downloadBarEnabled, colorNotifs, leafCornerNotifs, musicPlayerLeafLook;
+BOOL hideLabels;
 id preferences, file, yes;
 NSInteger configurations;
 NSString *previousTitle = @"poggers";

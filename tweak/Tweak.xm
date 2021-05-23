@@ -547,7 +547,6 @@ UIColor *customColor = [GcColorPickerUtils colorFromDefaults:@"aquariusprefs" wi
 %hook SBInCallBannerPresentableViewController
 +(double)cornerRadius{
 	return 1;
-	//NSLog(@"[aquarius] %@",[self.subviews objectAtIndex:0]);
 }
 -(BOOL)_canShowWhileLocked{
 	return YES;
@@ -559,6 +558,7 @@ UIColor *customColor = [GcColorPickerUtils colorFromDefaults:@"aquariusprefs" wi
 */
 %group springy
 %hook SBIconProgressView //progressbar
+// i think this is more efficient than other progress bars out there im not sure tho??
 -(void)_drawPieWithCenter:(CGPoint)arg1{
     UIProgressView *progressView;
 	progressView = [[UIProgressView alloc] initWithProgressViewStyle:UIProgressViewStyleDefault];
@@ -576,6 +576,17 @@ UIColor *customColor = [GcColorPickerUtils colorFromDefaults:@"aquariusprefs" wi
 	
 }
 %end
+
+
+%hook SBIconView
+
+-(void)setNeedsLayout{
+	%orig;
+	self.labelHidden = 1;
+}
+
+%end
+
 %end
 void reloadPrefs() { //prefs
 	musicPlayerEnabled = [file boolForKey:@"isMusicSectionEnabled"];
@@ -606,12 +617,14 @@ void reloadPrefs() { //prefs
 	downloadBarEnabled = [file boolForKey:@"downloadBarEnabled"];
 	colorNotifs = [file boolForKey:@"colorNotifs"];
 	musicPlayerLeafLook = [file boolForKey:@"musicPlayerLeafLook"];
+	hideLabels = [file boolForKey:@"hideLabels"];
 	
 }
 
 %ctor {
 	HBPreferences *file = [[HBPreferences alloc] initWithIdentifier:@"aquariusprefs"];
 	[file registerBool:&musicPlayerEnabled default:YES forKey:@"isMusicSectionEnabled"];
+	[file registerBool:&hideLabels default:NO forKey:@"hideLabels"];
 	[file registerBool:&isTimeHidden default:NO forKey:@"isTimeHidden"];
 	[file registerBool:&hideSnapImage default:YES forKey:@"hideSnapImage"];
 	[file registerBool:&isBatteryHidden default:NO forKey:@"isBatteryHidden"];
