@@ -2,6 +2,7 @@
 name: aquarius
 icmd: sbreload 
 all:
+    targetios: 14.0
     archs:
         - arm64
         - arm64e

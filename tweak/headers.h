@@ -234,7 +234,15 @@
 @property (nonatomic, retain) MRUNowPlayingTimeControlsView *timeControlsView;
 @property (nonatomic, retain) MRUNowPlayingTransportControlsView *transportControlsView;
 @property (nonatomic, retain) MRUNowPlayingVolumeControlsView *volumeControlsView;
+-(void) shuffle:(UIButton*)sender;
 @end
+
+@interface SPTNowPlayingCoverArtCell : UIView
+@end
+
+@interface SPTNowPlayingCoverArtImageView : UIView
+@end
+
 
 @interface MRUNowPlayingView : UIView
 @property (nonatomic, retain) MRUNowPlayingControlsView *controlsView;
@@ -253,6 +261,8 @@
 -(void)sendNotif;
 @property (nonatomic, weak,readonly) SBApplication * nowPlayingApplication;
 -(BOOL)changeTrack:(int)arg1 eventSource:(long long)arg2 ;
+-(BOOL)toggleRepeatForEventSource:(long long)arg1 ;
+-(BOOL)toggleShuffleForEventSource:(long long)arg1 ;
 @end
 
 @interface PLPlatterView : UIView
@@ -283,6 +293,7 @@ MarqueeLabel* songTitleLabel;
 MarqueeLabel* artistNameLabel;
 UIButton* songImageForSmall;
 UIButton* songBackground;
+UIButton* shuffleButton;
 UIImage *currentArtwork;
 UIImage *iconImage;
 NSData* lastArtworkData;

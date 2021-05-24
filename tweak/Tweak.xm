@@ -12,10 +12,17 @@
 	%orig(arg1);
 }
 %end
+%hook SpringBoard
+- (void)applicationDidFinishLaunching:(id)arg1 { // reload data after a respring
+    %orig;
+    [[%c(SBMediaController) sharedInstance] setNowPlayingInfo:0];
+}
+
+%end
 %hook MRUNowPlayingControlsView 
 -(void)setNeedsLayout{
-
-	MRUNowPlayingViewController *controller = (MRUNowPlayingViewController *)[self _viewControllerForAncestor]; //s/o lightmann for this it allows me to only change the lockscreen player and not the cc player // for the artwork background option, looks shit with the standard artwork there, unfortunately not working right noew along with the rest of the artwork background stuff
+MRUNowPlayingViewController *controller = (MRUNowPlayingViewController *)[self _viewControllerForAncestor]; //s/o lightmann for this it allows me to only change the lockscreen player and not the cc player
+	if (isArtworkBackground) [self.headerView.artworkView setHidden:YES]; // for the artwork background option, looks shit with the standard artwork there, unfortunately not working right noew along with the rest of the artwork background stuff
 	if (controller.context == 2 && configurations == 0) {
 		[self.transportControlsView setFrame:CGRectMake(CGRectGetMidX(self.headerView.artworkView.frame) + 5,CGRectGetMidY(self.headerView.frame)-15, self.transportControlsView.frame.size.width, self.transportControlsView.frame.size.height)];
 		//resizing controls, almost same for everytime i do this
@@ -36,8 +43,8 @@
 			[artistNameLabel setTextAlignment:NSTextAlignmentLeft];
 			[artistNameLabel setAlpha:1];
 			[self addSubview:artistNameLabel];
-			UIColor *customColor = [GcColorPickerUtils colorFromDefaults:@"aquariusprefs" withKey:@"customTitleLabelColor" fallback:@"000000"];
-			[artistNameLabel setTextColor:customColor];
+			UIColor *customColor = [GcColorPickerUtils colorFromDefaults:@"aquariusprefs" withKey:@"customTitleLabelColor"];
+			[songTitleLabel setTextColor:customColor];
 			[artistNameLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
 			[artistNameLabel.widthAnchor constraintEqualToConstant:230].active = YES;
 			[artistNameLabel.heightAnchor constraintEqualToConstant:21.0].active = YES;
@@ -50,10 +57,8 @@
 			[songTitleLabel setTextAlignment:NSTextAlignmentLeft];
 			[songTitleLabel setAlpha:1];
 			[self addSubview:songTitleLabel];
-			{
-			UIColor *customColor = [GcColorPickerUtils colorFromDefaults:@"aquariusprefs" withKey:@"customSubtitleLabelColor" fallback:@"000000"];
+			UIColor *customColor = [GcColorPickerUtils colorFromDefaults:@"aquariusprefs" withKey:@"customSubtitleLabelColor"];
 			[songTitleLabel setTextColor:customColor];
-			}
 			[songTitleLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
 			[songTitleLabel.widthAnchor constraintEqualToConstant:230].active = YES;
 			[songTitleLabel.heightAnchor constraintEqualToConstant:21.0].active = YES;
@@ -84,8 +89,8 @@
 			[artistNameLabel setTextAlignment:NSTextAlignmentLeft];
 			[artistNameLabel setAlpha:1];
 			[self addSubview:artistNameLabel];
-			UIColor *customColor = [GcColorPickerUtils colorFromDefaults:@"aquariusprefs" withKey:@"customTitleLabelColor" fallback:@"000000"];
-			[artistNameLabel setTextColor:customColor];
+			UIColor *customColor = [GcColorPickerUtils colorFromDefaults:@"aquariusprefs" withKey:@"customTitleLabelColor"];
+			[songTitleLabel setTextColor:customColor];
 			[artistNameLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
 			[artistNameLabel.widthAnchor constraintEqualToConstant:230].active = YES;
 			[artistNameLabel.heightAnchor constraintEqualToConstant:21.0].active = YES;
@@ -98,10 +103,8 @@
 			[songTitleLabel setTextAlignment:NSTextAlignmentLeft];
 			[songTitleLabel setAlpha:1];
 			[self addSubview:songTitleLabel];
-			{
-			UIColor *customColor = [GcColorPickerUtils colorFromDefaults:@"aquariusprefs" withKey:@"customSubtitleLabelColor" fallback:@"000000"];
+			UIColor *customColor = [GcColorPickerUtils colorFromDefaults:@"aquariusprefs" withKey:@"customSubtitleLabelColor"];
 			[songTitleLabel setTextColor:customColor];
-			}
 			[songTitleLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
 			[songTitleLabel.widthAnchor constraintEqualToConstant:230].active = YES;
 			[songTitleLabel.heightAnchor constraintEqualToConstant:21.0].active = YES;
@@ -131,8 +134,8 @@
 			[artistNameLabel setTextAlignment:NSTextAlignmentLeft];
 			[artistNameLabel setAlpha:1];
 			[self addSubview:artistNameLabel];
-			UIColor *customColor = [GcColorPickerUtils colorFromDefaults:@"aquariusprefs" withKey:@"customTitleLabelColor" fallback:@"000000"];
-			[artistNameLabel setTextColor:customColor];
+			UIColor *customColor = [GcColorPickerUtils colorFromDefaults:@"aquariusprefs" withKey:@"customTitleLabelColor"];
+			[songTitleLabel setTextColor:customColor];
 			[artistNameLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
 			[artistNameLabel.widthAnchor constraintEqualToConstant:230].active = YES;
 			[artistNameLabel.heightAnchor constraintEqualToConstant:21.0].active = YES;
@@ -146,7 +149,7 @@
 				[songTitleLabel setAlpha:1];
 				[self addSubview:songTitleLabel];
 				{
-				UIColor *customColor = [GcColorPickerUtils colorFromDefaults:@"aquariusprefs" withKey:@"customSubtitleLabelColor" fallback:@"000000"];
+				UIColor *customColor = [GcColorPickerUtils colorFromDefaults:@"aquariusprefs" withKey:@"customSubtitleLabelColor"];
 				[songTitleLabel setTextColor:customColor];
 				}
 				[songTitleLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
@@ -177,8 +180,8 @@
 			[artistNameLabel setTextAlignment:NSTextAlignmentLeft];
 			[artistNameLabel setAlpha:1];
 			[self addSubview:artistNameLabel];
-			UIColor *customColor = [GcColorPickerUtils colorFromDefaults:@"aquariusprefs" withKey:@"customTitleLabelColor"];
-			[artistNameLabel setTextColor:customColor];
+			[GcColorPickerUtils colorFromDefaults:@"aquariusprefs" withKey:@"customTitleLabelColor"];
+			[songTitleLabel setTextColor:customColor];
 			[artistNameLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
 			[artistNameLabel.widthAnchor constraintEqualToConstant:230].active = YES;
 			[artistNameLabel.heightAnchor constraintEqualToConstant:21.0].active = YES;
@@ -191,8 +194,8 @@
 			[songTitleLabel setTextAlignment:NSTextAlignmentLeft];
 			[songTitleLabel setAlpha:1];
 			[self addSubview:songTitleLabel];
-			{
-				UIColor *customColor = [GcColorPickerUtils colorFromDefaults:@"aquariusprefs" withKey:@"customSubtitleLabelColor"];
+			if (musicPlayerColorsEnabled) {
+				UIColor *customColor = [GcColorPickerUtils colorFromDefaults:@"aquariusprefs" withKey:@"customSubtitleColor"];
 				[songTitleLabel setTextColor:customColor];
 			}
 			[songTitleLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
@@ -204,6 +207,11 @@
 	} else{ 
 		%orig;
 		}
+}
+%new 
+
+-(void) shuffle:(UIButton*)sender {
+	[[%c(SBMediaController) sharedInstance] toggleShuffleForEventSource:0];	
 }
 %end
 
@@ -393,7 +401,7 @@ if (isBackgroundColored){
 				[songImageForSmall setImage:currentArtwork forState:UIControlStateNormal]; 
 				fuckingArtworkColor = [libKitten primaryColor:currentArtwork];
 				fuckingArtworkColor2 = [libKitten secondaryColor:currentArtwork];
-	
+				[shuffleButton setImage:[UIImage systemImageNamed:@"shuffle"] forState: UIControlStateNormal];
 				[[NSNotificationCenter defaultCenter] postNotificationName:@"com.nico671.updateColors" object:nil];
 			}
         }
@@ -583,10 +591,10 @@ UIColor *customColor = [GcColorPickerUtils colorFromDefaults:@"aquariusprefs" wi
 -(void)setNeedsLayout{
 	%orig;
 	self.labelHidden = 1;
+
 }
 
 %end
-
 %end
 void reloadPrefs() { //prefs
 	musicPlayerEnabled = [file boolForKey:@"isMusicSectionEnabled"];
